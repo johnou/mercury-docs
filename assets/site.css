@@ -42,7 +42,7 @@ code, pre, kbd { font-family: "SFMono-Regular", Consolas, "Liberation Mono", mon
   color: white;
 }
 .brand { display: inline-flex; align-items: center; gap: 8px; font-weight: 760; font-size: 19px; text-decoration: none; letter-spacing: -.03em; }
-.brand svg { width: 31px; height: 31px; fill: var(--lime); }
+.brand img { width: 34px; height: 36px; object-fit: contain; }
 .topbar nav { display: flex; gap: 27px; margin-left: auto; }
 .topbar nav a { color: #bac7c2; text-decoration: none; font-size: 14px; }
 .topbar nav a:hover, .topbar nav a:focus { color: white; }

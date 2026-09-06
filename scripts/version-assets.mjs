@@ -2,11 +2,12 @@ import { createHash } from 'node:crypto';
 import { readFile, writeFile } from 'node:fs/promises';
 
 const pages = {
-  'index.html': ['site.css', 'content.js', 'site.js'],
-  'cloud-privacy.html': ['site.css'],
-  'cloud-terms.html': ['site.css'],
-  'data-retention.html': ['site.css'],
-  'support.html': ['site.css'],
+  'index.html': ['site.css', 'content.js', 'site.js', 'mercury-original.png'],
+  'cloud-privacy.html': ['site.css', 'mercury-original.png'],
+  'cloud-terms.html': ['site.css', 'mercury-original.png'],
+  'data-retention.html': ['site.css', 'mercury-original.png'],
+  'support.html': ['site.css', 'mercury-original.png'],
+  'legacy.html': ['mercury-original.png'],
 };
 const digests = new Map();
 
