@@ -14,4 +14,4 @@ Check local links, duplicate IDs, and asset versions:
 node scripts/check-docs.mjs
 ```
 
-Before publishing the Cloud policy pages, confirm that NWGG Pty Ltd is the operator named in the Marketplace listing and add a private security and privacy contact. Do not direct sensitive reports to a public GitHub issue.
+NWGG Pty Ltd is the confirmed Marketplace operator. Keep private security and privacy reports directed to `plugin-support@johno.it`, not a public GitHub issue.

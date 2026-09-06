@@ -39,7 +39,9 @@ Sample simulation is subject to the same installation usage limits as other admi
 
 A Jira administrator can select **Dry-run real issue** to run source against one real issue. Mercury reads current Jira data with the app identity. Read helpers call Jira. Write helpers validate their arguments and append to `proposedWrites` without sending a write request.
 
-A dry run can show how the script behaves with current issue data. It does not prove that Jira permissions, workflow conditions, or field rules would accept the proposed writes in a live run. The immediate result includes proposed writes, but retained history contains bounded logs and outcome metadata rather than Jira response values or proposed-write payloads.
+A dry run can show how the script behaves with current issue data. Synthetic issues created during the run use collision-safe `dry-run:N` keys, and transitions for synthetic issues are unsupported. Proposed writes can total up to 256 KiB. Mercury does not include script source in Jira write request bodies.
+
+A dry run does not prove that Jira permissions, workflow conditions, or field rules would accept the proposed writes in a live run. The immediate result includes proposed writes, but retained history contains bounded logs and outcome metadata rather than Jira response values or proposed-write payloads.
 
 ## Save scripts and revisions
 
@@ -95,7 +97,7 @@ Emergency pause blocks new workflow, console, dry-run, listener, and scheduled a
 
 ## Read automation health
 
-**Usage & health** shows the latest bounded success or failure for workflows and each automation. It also reports failures that happen before normal run history starts. Health records expire after 400 days. Health storage is best effort and never retries a script. Mercury records the Atlassian account ID of the administrator who last changed usage limits or pause state.
+**Usage & health** shows the latest bounded success or failure for workflows and each automation. It also reports failures that happen before normal run history starts. Health records expire after 365 days. Health storage is best effort and never retries a script. Mercury records the Atlassian account ID of the administrator who last changed usage limits or pause state.
 
 ## Back up configuration
 
@@ -131,3 +133,4 @@ The [Mercury Server documentation](legacy.html) contains the original guide, pri
 - [Data retention](data-retention.html)
 - [Mercury Cloud terms](cloud-terms.html)
 - [Support](support.html)
+- Private support, security, and privacy: [plugin-support@johno.it](mailto:plugin-support@johno.it)
