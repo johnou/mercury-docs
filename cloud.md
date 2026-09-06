@@ -8,7 +8,7 @@ Mercury uses Atlassian Forge and a backend QuickJS runtime. Guest scripts receiv
 
 Workflow post-functions and backend validation and simulation are implemented. The workbench and all eight Jira helpers are implemented as a development preview. Live verification continues on the private Mercury demo site.
 
-A live workflow run on MERC-1 completed in 2.155 seconds with two Jira calls.
+A backend workflow invocation on MERC-1 completed in 2.155 seconds with two Jira calls. The sample content and saved script still await final verification.
 
 Mercury Cloud is not available for public installation. It does not claim full ScriptRunner feature parity.
 
