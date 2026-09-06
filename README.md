@@ -8,6 +8,8 @@ Product status
 
 Mercury Cloud provides JavaScript workflow scripts for Jira Cloud. See [the Cloud documentation and migration notes](cloud.md).
 
+Cloud policies are separate from the legacy Server terms: [Privacy](cloud-privacy.html), [data retention](data-retention.html), [terms](cloud-terms.html), and [support](support.html).
+
 The Server documentation below describes the legacy product. Existing Server scripts do not run unchanged on Jira Cloud.
 
 Getting started

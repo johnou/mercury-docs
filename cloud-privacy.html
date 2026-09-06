@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="How Mercury Cloud processes and stores data.">
+  <title>Mercury Cloud privacy</title>
+  <link rel="stylesheet" href="./assets/site.css?v=88810bb0ca61">
+</head>
+<body class="legal-page">
+  <header class="legal-header"><a class="brand" href="./index.html"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M9 27 16 8l5 12 4-8 6 15h-6l-4-10-5 13-3-3Z"/></svg><span>Mercury</span></a><p class="eyebrow">Cloud policy</p><h1>Privacy notice</h1><p>How Mercury Cloud processes Jira data when administrators create and run JavaScript automation.</p></header>
+  <main class="legal-content">
+    <nav aria-label="Cloud policies"><a href="./cloud-privacy.html" aria-current="page">Privacy</a><a href="./data-retention.html">Data retention</a><a href="./cloud-terms.html">Terms</a><a href="./support.html">Support</a><a href="./legacy.html">Legacy docs</a></nav>
+    <p><strong>Effective 7 September 2026.</strong> Johnathan Crawford operates Mercury Cloud. This notice applies to the Forge app for Jira Cloud. The separate Mercury Server policies remain in the legacy documentation.</p>
+    <section><h2>Data Mercury processes</h2><div class="comparison-wrap"><table><thead><tr><th>Data</th><th>Purpose</th></tr></thead><tbody>
+      <tr><th>Scripts and revisions</th><td>Names, JavaScript source, immutable revision identifiers, archive state, and timestamps support workflows, console runs, listeners, scheduled jobs, and configuration portability.</td></tr>
+      <tr><th>Automation settings</th><td>Names, enabled state, pinned revision, project and event filters, issue keys, intervals, execution limits, and pause state control automatic execution.</td></tr>
+      <tr><th>Run records</th><td>Origin, issue key, Atlassian account ID when Jira supplies one, timestamps, outcome, duration, Jira call count, and bounded script logs provide history and troubleshooting.</td></tr>
+      <tr><th>Delivery and usage records</th><td>Hashed event or schedule identities, run identifiers, hourly and monthly counters, and recent health results enforce duplicate protection, budgets, pause controls, and status reporting.</td></tr>
+      <tr><th>Jira data used during execution</th><td>Issue fields, searches, transitions, and request results are processed so a script can run. A real issue dry run reads current Jira data and records proposed writes without sending those writes.</td></tr>
+    </tbody></table></div><p>Script authors control what they place in source and console logs. Do not log secrets or data that is not needed to diagnose the automation.</p></section>
+    <section><h2>Where processing happens</h2><p>Mercury uses Atlassian Forge compute, Jira APIs, and Forge hosted storage. The app manifest does not configure an external remote service for app data. Atlassian scopes hosted storage to each app installation.</p><p>Forge hosted storage supports Atlassian data residency. When an eligible Jira site is pinned, Atlassian hosts and migrates the app's hosted data with that site. Forge may sometimes execute an invocation outside the host product's location for platform reliability.</p></section>
+    <section><h2>Sharing and access</h2><p>Mercury sends Jira requests through Atlassian APIs and does not send app data to an operator-run remote database. Atlassian processes Forge-hosted data as the platform provider under its own terms and Forge data-processing commitments.</p><p>Workbench actions require a signed-in Jira administrator. Workflow and automation runs use the Mercury app identity and the Jira scopes granted during installation.</p></section>
+    <section><h2>Retention and deletion</h2><p>Run history, its bounded logs, and delivery claims expire after 30 days. One-use live-run confirmations expire after five minutes and their storage records have a one-day expiry. Scripts, immutable revisions, automation settings, usage controls, and health summaries remain while the app is installed.</p><p>After uninstall, Forge hosted storage follows Atlassian's hosted-storage lifecycle. Atlassian currently documents a 28-day retention period. A reinstall does not automatically restore that data. Recovery requires customer consent and an Atlassian request within 21 days.</p><p>See the <a href="./data-retention.html">data retention page</a> for the complete table.</p></section>
+    <section><h2>Your choices</h2><p>A Jira administrator can disable automations, pause new execution, archive scripts, export portable configuration, or uninstall the app. Imported automations remain disabled until an administrator reviews and enables them.</p><p>Use <a href="./support.html">Mercury support</a> for a data question. Do not include Jira data, script source, account identifiers, or security details in a public issue.</p></section>
+    <section class="source-list"><h2>Platform sources</h2><ul><li><a href="https://developer.atlassian.com/platform/forge/storage-reference/">Forge storage and uninstall retention</a></li><li><a href="https://developer.atlassian.com/platform/forge/storage-reference/hosted-storage-data-lifecycle/">Hosted storage data lifecycle</a></li><li><a href="https://developer.atlassian.com/platform/forge/data-residency/">Forge data residency</a></li><li><a href="https://developer.atlassian.com/platform/forge/shared-responsibility-model/">Forge shared responsibility model</a></li></ul></section>
+  </main>
+  <footer><a class="brand" href="./index.html"><span>Mercury</span></a><p>JavaScript workflow automation for Jira Cloud.</p><nav aria-label="Footer"><a href="./cloud-terms.html">Terms</a><a href="./support.html">Support</a></nav></footer>
+</body>
+</html>

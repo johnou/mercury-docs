@@ -6,4 +6,4 @@ After changing `assets/site.css`, `assets/content.js`, or `assets/site.js`, refr
 node scripts/version-assets.mjs
 ```
 
-Commit the resulting `index.html` changes with the asset changes.
+Commit the resulting HTML changes with the asset changes.

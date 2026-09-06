@@ -8,15 +8,15 @@
   <meta property="og:title" content="Mercury for Jira Cloud">
   <meta property="og:description" content="Write focused JavaScript automation for Jira Cloud workflows.">
   <title>Mercury for Jira Cloud</title>
-  <link rel="stylesheet" href="./assets/site.css?v=70a3b2aa97a1">
-  <script src="./assets/content.js?v=480075a647a8" defer></script>
-  <script src="./assets/site.js?v=278dc8aaea67" defer></script>
+  <link rel="stylesheet" href="./assets/site.css?v=88810bb0ca61">
+  <script src="./assets/content.js?v=38b13bd46bc3" defer></script>
+  <script src="./assets/site.js?v=78b6e7a4508e" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="topbar">
     <a class="brand" href="#top" aria-label="Mercury home"><svg viewBox="0 0 40 40" role="img" aria-label=""><path d="M9 27 16 8l5 12 4-8 6 15h-6l-4-10-5 13-3-3Z"/></svg><span>Mercury</span></a>
-    <nav aria-label="Primary navigation"><a href="#start">Get started</a><a href="#reference">API</a><a href="#workbench">Workbench</a><a href="#roadmap">Features</a><a href="./legacy.html">Legacy docs</a></nav>
+    <nav aria-label="Primary navigation"><a href="#start">Get started</a><a href="#reference">API</a><a href="#workbench">Workbench</a><a href="#operations">Controls</a><a href="./support.html">Support</a></nav>
     <button class="search-open" type="button" data-search-open aria-haspopup="dialog"><span aria-hidden="true">⌕</span> Search <kbd>/</kbd></button>
   </header>
 
@@ -112,6 +112,26 @@ console.log(<span class="str">"summary updated"</span>, issue.key);</code></pre>
       </div>
     </section>
 
+    <section class="section operations" id="operations">
+      <div class="section-intro"><p class="eyebrow">Safe operations</p><h2>Know what runs before it writes</h2><p>Mercury gives Jira administrators a read-only path for real issue data, installation controls, recent health, and portable configuration.</p></div>
+      <ul class="launch-checklist" aria-label="Administrator onboarding">
+        <li><strong>Set limits.</strong><span>Open Usage &amp; health. Review hourly and monthly limits and the emergency pause.</span></li>
+        <li><strong>Test safely.</strong><span>Start with sample simulation, then dry run against one real issue before a live write.</span></li>
+        <li><strong>Review automation.</strong><span>Save an immutable revision. Check its event, project, issue, and interval before enabling it.</span></li>
+        <li><strong>Keep a backup.</strong><span>Export configuration after a reviewed change. Restored automations stay disabled.</span></li>
+      </ul>
+      <div class="mode-explorer">
+        <div class="mode-tabs" role="tablist" aria-label="Execution path" data-mode-tabs></div>
+        <div class="mode-panel" role="tabpanel" data-mode-panel></div>
+      </div>
+      <div class="operations-grid">
+        <article><span>Real issue dry run</span><h3>Read Jira, intercept writes</h3><p>Choose one issue and run with app-authorized real Jira reads. Mercury records proposed writes without sending them. A dry run cannot prove Jira would accept those writes.</p></article>
+        <article><span>Usage controls</span><h3>Bound each installation</h3><p>Mercury admits at most 100 runs per UTC hour and 10,000 per UTC month. Administrators can lower those limits or pause new runs. In-flight runs continue.</p></article>
+        <article><span>Automation health</span><h3>See the latest outcome</h3><p>Health shows the latest success or failure for workflows and automations, including failures that happen before a normal history record starts.</p></article>
+        <article><span>Backup</span><h3>Move reviewed definitions</h3><p>Export current and pinned source snapshots with up to 25 automation definitions. Import creates new local IDs and keeps every imported automation disabled for review.</p></article>
+      </div>
+    </section>
+
     <section class="section delivery" id="automation-delivery">
       <div class="section-intro"><p class="eyebrow">Automation delivery</p><h2>Bounded work with visible tradeoffs</h2><p>Mercury uses loop protection and records an auditable result without automatically replaying failed work.</p></div>
       <div class="delivery-grid">
@@ -165,7 +185,7 @@ console.log(<span class="str">"summary updated"</span>, issue.key);</code></pre>
   <footer>
     <a class="brand" href="#top"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M9 27 16 8l5 12 4-8 6 15h-6l-4-10-5 13-3-3Z"/></svg><span>Mercury</span></a>
     <p>JavaScript workflow automation for Jira Cloud.</p>
-    <nav aria-label="Footer"><a href="./legacy.html#mercury-privacy-policy">Privacy</a><a href="./legacy.html#mercury-terms-of-service">Terms</a><a href="./legacy.html#mercury-eula-for-atlassian-plugins">EULA</a><a href="https://github.com/johnou/mercury-docs/issues">Issues</a></nav>
+    <nav aria-label="Footer"><a href="./cloud-privacy.html">Privacy</a><a href="./cloud-terms.html">Terms</a><a href="./data-retention.html">Data retention</a><a href="./support.html">Support</a><a href="./legacy.html">Legacy docs</a></nav>
   </footer>
 
   <dialog class="search" data-search-dialog>

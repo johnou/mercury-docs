@@ -38,6 +38,18 @@ function renderFeatures() {
   `).join('');
 }
 
+function renderModes(selectedId) {
+  const selected = docs.modes.find(mode => mode.id === selectedId) || docs.modes[0];
+  document.querySelector('[data-mode-tabs]').innerHTML = docs.modes.map(mode =>
+    `<button type="button" role="tab" aria-selected="${mode.id === selected.id}" data-mode="${mode.id}">${escapeHtml(mode.name)}</button>`
+  ).join('');
+  document.querySelector('[data-mode-panel]').innerHTML = `
+    <h3>${escapeHtml(selected.name)}</h3>
+    <dl><div><dt>Reads</dt><dd>${escapeHtml(selected.reads)}</dd></div><div><dt>Writes</dt><dd>${escapeHtml(selected.writes)}</dd></div><div><dt>Approval</dt><dd>${escapeHtml(selected.confirmation)}</dd></div><div><dt>History</dt><dd>${escapeHtml(selected.history)}</dd></div></dl>
+    <p>${escapeHtml(selected.note)}</p>`;
+  document.querySelectorAll('[data-mode]').forEach(button => button.addEventListener('click', () => renderModes(button.dataset.mode)));
+}
+
 function renderRecipe(selectedTitle) {
   const selected = docs.recipes.find(recipe => recipe.title === selectedTitle) || docs.recipes[0];
   document.querySelector('[data-recipe-tabs]').innerHTML = docs.recipes.map(recipe =>
@@ -114,6 +126,7 @@ if (legacyAnchors.has(location.hash.slice(1))) {
   renderApi(docs.helpers[0].id);
   renderRecipe(docs.recipes[0].title);
   renderFeatures();
+  renderModes(docs.modes[0].id);
   const exampleForm = document.querySelector('[data-example-form]');
   exampleForm.addEventListener('submit', event => {
     event.preventDefault();

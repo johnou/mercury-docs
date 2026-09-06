@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Mercury Cloud data retention and deletion."><title>Mercury Cloud data retention</title><link rel="stylesheet" href="./assets/site.css?v=88810bb0ca61"></head>
+<body class="legal-page">
+  <header class="legal-header"><a class="brand" href="./index.html"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M9 27 16 8l5 12 4-8 6 15h-6l-4-10-5 13-3-3Z"/></svg><span>Mercury</span></a><p class="eyebrow">Cloud policy</p><h1>Data retention</h1><p>What Mercury stores, why it is needed, and when it expires.</p></header>
+  <main class="legal-content">
+    <nav aria-label="Cloud policies"><a href="./cloud-privacy.html">Privacy</a><a href="./data-retention.html" aria-current="page">Data retention</a><a href="./cloud-terms.html">Terms</a><a href="./support.html">Support</a><a href="./legacy.html">Legacy docs</a></nav>
+    <section><h2>Retention while installed</h2><div class="comparison-wrap"><table><thead><tr><th>Record</th><th>Retention</th><th>Reason</th></tr></thead><tbody>
+      <tr><th>Scripts and immutable revisions</th><td>While installed</td><td>Run workflows and pinned automations; support review, archive, restore, and export.</td></tr>
+      <tr><th>Automation definitions</th><td>While installed</td><td>Store listener and schedule configuration. Imported definitions start disabled.</td></tr>
+      <tr><th>Execution control and health</th><td>While installed</td><td>Apply pause and usage settings and show the latest bounded success or failure.</td></tr>
+      <tr><th>Hourly usage counters</th><td>3 days</td><td>Enforce the current UTC-hour execution limit and support recent usage inspection.</td></tr>
+      <tr><th>Monthly usage counters</th><td>400 days</td><td>Enforce the current UTC-month execution limit and support bounded usage inspection. These counters are not a billing ledger.</td></tr>
+      <tr><th>Run history and script logs</th><td>30 days</td><td>Show outcomes and diagnose workflow, console, listener, schedule, and dry-run behavior.</td></tr>
+      <tr><th>Delivery claims</th><td>30 days</td><td>Suppress a known duplicate workflow event, listener event, or schedule bucket.</td></tr>
+      <tr><th>Live-run confirmation record</th><td>Token valid for five minutes; record expires after one day</td><td>Bind one administrator, one issue key, and exact source to a single live-run approval.</td></tr>
+    </tbody></table></div></section>
+    <section><h2>Export and import</h2><p>A portable export contains current scripts, source snapshots needed by pinned revisions, and automation definitions. It excludes history, logs, actors, claims, confirmations, health, usage, pause state, license state, and installation identifiers. Import creates new local IDs, forces every automation to remain disabled for review, and treats repeated import of the same bundle as the same operation.</p></section>
+    <section><h2>After uninstall</h2><p>Mercury uses Forge hosted storage. Atlassian currently documents that hosted data is retained for 28 days after uninstall. Reinstalling does not automatically reconnect the old data. With customer consent, an app developer can ask Atlassian to relink it when the request is submitted within 21 days of uninstall.</p><p>These uninstall periods are controlled by Atlassian and can change. Check the <a href="https://developer.atlassian.com/platform/forge/storage-reference/">current Forge storage documentation</a> before relying on a recovery window.</p></section>
+    <section><h2>Data residency</h2><p>Persistent Forge hosted storage follows Atlassian's data residency controls. Atlassian documents that eligible app data is pinned and migrated with the host Jira site. Mercury does not configure an external app-data remote.</p><p>Read <a href="https://developer.atlassian.com/platform/forge/data-residency/">Forge data residency</a> and the <a href="https://developer.atlassian.com/platform/forge/storage-reference/hosted-storage-data-lifecycle/">hosted storage lifecycle</a>.</p></section>
+  </main>
+  <footer><a class="brand" href="./index.html"><span>Mercury</span></a><p>JavaScript workflow automation for Jira Cloud.</p><nav aria-label="Footer"><a href="./cloud-privacy.html">Privacy</a><a href="./support.html">Support</a></nav></footer>
+</body></html>

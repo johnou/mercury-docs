@@ -73,7 +73,17 @@ window.MERCURY_DOCS = Object.freeze({
     { name: 'Run history', detail: 'Inspect console, workflow, listener, and job runs for 30 days; select Refresh for new entries.' },
     { name: 'Eight Jira helpers', detail: 'Read, search, create, update, comment, transition, and link issues.' },
     { name: 'Event listeners', detail: 'Run a pinned revision for issue-created or issue-updated events in one project.' },
-    { name: 'Scheduled jobs', detail: 'Run a pinned revision hourly, daily, or weekly against one issue.' }
+    { name: 'Scheduled jobs', detail: 'Run a pinned revision hourly, daily, or weekly against one issue.' },
+    { name: 'Real issue dry run', detail: 'Read current Jira data while Mercury intercepts and records every proposed write.' },
+    { name: 'Usage and pause controls', detail: 'Lower hourly or monthly run limits and pause new admissions without hiding history.' },
+    { name: 'Automation health', detail: 'Inspect the latest success or failure, including errors before execution starts.' },
+    { name: 'Backup and restore', detail: 'Move current and pinned source snapshots while importing every automation disabled.' }
+  ],
+  modes: [
+    { id: 'sample', name: 'Sample simulation', reads: 'DEMO sample data', writes: 'Recorded only', confirmation: 'Not required', history: 'Not retained', note: 'Use this first to check syntax and payload shape.' },
+    { id: 'dryrun', name: 'Real issue dry run', reads: 'Current Jira data as app', writes: 'Intercepted and recorded', confirmation: 'Jira administrator', history: 'Retained for 30 days', note: 'Use this to inspect proposed writes. Jira does not validate or accept those writes.' },
+    { id: 'live', name: 'Live console run', reads: 'Current Jira data', writes: 'Sent to Jira', confirmation: 'One use, five minutes', history: 'Retained for 30 days', note: 'Review the exact source and issue key before you confirm.' },
+    { id: 'automatic', name: 'Listener or job', reads: 'Current Jira data', writes: 'Sent to Jira', confirmation: 'Enabled definition', history: 'Retained for 30 days', note: 'The pinned revision runs within installation limits. A rejected job is not replayed automatically.' }
   ],
   search: [
     { title: 'Write your first script', section: 'Get started', href: '#start', text: 'workflow transition add post function validate simulate JavaScript' },
@@ -87,6 +97,7 @@ window.MERCURY_DOCS = Object.freeze({
     { title: 'jira.transitionIssue', section: 'API', href: '#reference', text: 'move issue transition ID fields helper' },
     { title: 'jira.linkIssues', section: 'API', href: '#reference', text: 'link inward outward issue key type helper' },
     { title: 'Use the workbench', section: 'How-to', href: '#workbench', text: 'console saved scripts revisions archive live run confirmation history refresh listeners scheduled jobs' },
+    { title: 'Safe operations', section: 'Controls', href: '#operations', text: 'real issue dry run usage hourly monthly budget pause health export import disabled configuration' },
     { title: 'Automation limits and delivery', section: 'How-to', href: '#automation-delivery', text: '25 five deduplication self generated trace retry partial writes hourly daily weekly UTC' },
     { title: 'Cloud features', section: 'Features', href: '#roadmap', text: 'console saved scripts library history helpers listeners scheduled jobs available behavior' },
     { title: 'Move from Server', section: 'Migration', href: '#migration', text: 'Groovy JavaScript JVM Cloud port migrate fix versions' },

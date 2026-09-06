@@ -1,19 +1,30 @@
 import { createHash } from 'node:crypto';
 import { readFile, writeFile } from 'node:fs/promises';
 
-const pagePath = new URL('../index.html', import.meta.url);
-const assets = ['site.css', 'content.js', 'site.js'];
-let page = await readFile(pagePath, 'utf8');
+const pages = {
+  'index.html': ['site.css', 'content.js', 'site.js'],
+  'cloud-privacy.html': ['site.css'],
+  'cloud-terms.html': ['site.css'],
+  'data-retention.html': ['site.css'],
+  'support.html': ['site.css'],
+};
+const digests = new Map();
 
-for (const name of assets) {
+for (const name of new Set(Object.values(pages).flat())) {
   const assetPath = new URL(`../assets/${name}`, import.meta.url);
-  const digest = createHash('sha256')
+  digests.set(name, createHash('sha256')
     .update(await readFile(assetPath))
     .digest('hex')
-    .slice(0, 12);
-  const reference = new RegExp(`\\./assets/${name.replace('.', '\\.')}(?:\\?v=[a-f0-9]+)?`, 'g');
-  if (!reference.test(page)) throw new Error(`index.html does not reference assets/${name}`);
-  page = page.replace(reference, `./assets/${name}?v=${digest}`);
+    .slice(0, 12));
 }
 
-await writeFile(pagePath, page);
+for (const [pageName, assets] of Object.entries(pages)) {
+  const pagePath = new URL(`../${pageName}`, import.meta.url);
+  let page = await readFile(pagePath, 'utf8');
+  for (const name of assets) {
+    const reference = new RegExp(`\\./assets/${name.replace('.', '\\.')}(?:\\?v=[a-f0-9]+)?`, 'g');
+    if (!reference.test(page)) throw new Error(`${pageName} does not reference assets/${name}`);
+    page = page.replace(reference, `./assets/${name}?v=${digests.get(name)}`);
+  }
+  await writeFile(pagePath, page);
+}

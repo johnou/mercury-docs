@@ -33,6 +33,12 @@ The console offers two execution paths:
 
 The live confirmation token works once. Mercury consumes the token and creates the running history record in one atomic operation. Live console runs execute with the Mercury app identity. The backend checks that the current user is a Jira administrator before it creates the token or runs the script.
 
+## Dry run with a real issue
+
+A Jira administrator can dry run source against one real issue. Mercury reads current Jira data with the app identity. Read helpers call Jira. Write helpers validate their arguments and append to `proposedWrites` without sending a write request.
+
+A dry run can show how the script behaves with current issue data. It does not prove that Jira permissions, workflow conditions, or field rules would accept the proposed writes in a live run.
+
 ## Save scripts and revisions
 
 Select **Save revision** to create an immutable source revision. Loading a saved script copies its source into the console editor. Saving the edited source creates another immutable revision.
@@ -77,6 +83,24 @@ One coarse hourly Forge trigger checks all enabled jobs. Intervals use 1, 24, or
 
 The claim uses the automation ID and bucket identity. Editing, disabling, or re-enabling a job does not run the same claimed bucket again.
 
+## Control usage and pause execution
+
+Mercury admits at most 100 runs per installation in one UTC hour and 10,000 runs in one UTC month. A Jira administrator can lower either limit. The server caps cannot be raised.
+
+An admitted run counts even when it later fails. Duplicate or rejected runs do not count. These counters limit app executions. They are not a spending meter or billing ledger, and Forge can still charge platform overhead for invocations and admission checks.
+
+Emergency pause blocks new workflow, console, dry-run, listener, and scheduled admissions. It does not cancel a run that already started. A scheduled job rejected while paused or over limit is not replayed automatically.
+
+## Read automation health
+
+Usage & health shows the latest bounded success or failure for workflows and each automation. It also reports failures that happen before normal run history starts. Health storage is best effort and never retries a script.
+
+## Back up configuration
+
+Backup exports current scripts, source snapshots required by pinned revisions, and up to 25 automation definitions. A bundle can contain at most 10 source entries and 256 KiB of UTF-8 JSON. It excludes history, logs, account IDs, delivery claims, confirmations, usage, health, pause state, license state, and installation identifiers.
+
+Restore validates the complete bundle before writing. It creates new local IDs, keeps every imported automation disabled, and makes repeated import of the same bundle idempotent. Review imported source and settings before enabling an automation.
+
 ## Automation limits and failure behavior
 
 Each installation can store 25 listener and scheduled-job definitions. Five definitions can be enabled at once.
@@ -98,3 +122,10 @@ Atlassian provides a [free Cloud developer site](https://go.atlassian.com/cloud-
 ## Legacy availability
 
 The [Mercury Server documentation](legacy.html) contains the original guide, privacy policy, terms, and EULA. The text remains unchanged.
+
+## Policies and support
+
+- [Mercury Cloud privacy](cloud-privacy.html)
+- [Data retention](data-retention.html)
+- [Mercury Cloud terms](cloud-terms.html)
+- [Support](support.html)
