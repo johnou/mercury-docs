@@ -32,10 +32,12 @@
       <div class="code-window" aria-label="Example Mercury script">
         <div class="window-bar"><span></span><span></span><span></span><strong>transition.js</strong></div>
         <pre><code><span class="kw">const</span> current = <span class="kw">await</span> jira.getIssue(issue.key);
+<span class="kw">const</span> status = current.fields.status.name;
+<span class="kw">const</span> summary = current.fields.summary;
 
 <span class="kw">await</span> jira.updateIssue(issue.key, {
   fields: {
-    summary: <span class="str">`[${current.fields.status.name}] ${current.fields.summary}`</span>
+    summary: <span class="str">`[${status}] ${summary}`</span>
   }
 });
 
@@ -103,7 +105,7 @@ console.log(<span class="str">"summary updated"</span>, issue.key);</code></pre>
     <section class="section" id="workbench">
       <div class="section-intro"><p class="eyebrow">Development preview</p><h2>Use the automation workbench</h2><p>Jira administrators can open five connected views. The backend checks Jira administrator permission for every action.</p></div>
       <div class="guide-grid">
-        <article><span>Console</span><h3>Simulate, then confirm a live run</h3><ol><li>Write a script of 24 KiB or less.</li><li>Select <strong>Simulate</strong> to use the DEMO-1 sample. Simulation records writes and never changes Jira.</li><li>Enter one issue key and select <strong>Review live run</strong>.</li><li>Check the exact source and issue key. Select <strong>Run live</strong> before the one-use confirmation expires after five minutes.</li></ol><p>Mercury consumes the confirmation and creates the running history record in one atomic operation. Live console runs use the Mercury app identity.</p></article>
+        <article><span>Console</span><h3>Simulate, then confirm a live run</h3><ol><li>Write a script of 24 KiB or less.</li><li>Select <strong>Simulate</strong> to use the DEMO-1 sample. Simulation records writes and never changes Jira.</li><li>Enter one issue key and select <strong>Review live run</strong>.</li><li>Check the exact source and issue key. Select <strong>Run live</strong> before the one-use confirmation expires after five minutes.</li></ol><p>In simulation, search accepts only <code>project = DEMO</code> or <code>key = DEMO-n</code>. Sample transitions are <code>11</code> To Do, <code>31</code> In Progress, and <code>41</code> Done.</p><p>Mercury consumes the confirmation and creates the running history record in one atomic operation. Live console runs use the Mercury app identity.</p></article>
         <article><span>Scripts</span><h3>Save and pin revisions</h3><ol><li>Select <strong>Save revision</strong> to create an immutable revision.</li><li>Open <strong>Scripts</strong> to review or load an older revision.</li><li>Choose a saved revision when you create a listener or scheduled job.</li></ol><p>An automation stays pinned to that revision. Archiving a script prevents new enables, but it does not disable automations that already use the revision.</p></article>
         <article><span>History</span><h3>Inspect the last 30 days</h3><p>Open <strong>History</strong> to inspect the origin, issue, start time, duration, Jira call count, logs, and failure code.</p><p>A run left as <code>running</code> after a crash has an uncertain outcome. Mercury does not retry it automatically. If only final history storage fails, the console still returns the actual script result and logs with a <code>finalization-failed</code> warning.</p></article>
         <article><span>Listeners</span><h3>React to issue events</h3><ol><li>Choose <strong>Issue created</strong> or <strong>Issue updated</strong>.</li><li>Enter the required project key.</li><li>Choose a saved revision and save the listener disabled.</li><li>Enable it after you review the source and project.</li></ol></article>

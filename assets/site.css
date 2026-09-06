@@ -86,7 +86,7 @@ h1 { max-width: 720px; margin: 0; font-size: clamp(47px, 6.3vw, 82px); line-heig
 .window-bar span:nth-child(3) { background: #56b982; }
 .window-bar strong { margin-left: 12px; color: #8ea09a; font-size: 12px; font-weight: 500; }
 pre { margin: 0; overflow: auto; }
-.code-window pre { min-height: 326px; padding: 38px 31px; color: #d5e3de; font-size: clamp(12px, 1.1vw, 15px); line-height: 1.9; }
+.code-window pre { min-height: 326px; padding: 38px 31px; overflow-x: hidden; color: #d5e3de; font-size: clamp(12px, 1.1vw, 15px); line-height: 1.9; white-space: pre-wrap; overflow-wrap: anywhere; }
 .kw { color: #d5f57d; }
 .str { color: #7dd9bc; }
 .comment { color: #758781; }

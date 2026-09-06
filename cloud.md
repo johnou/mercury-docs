@@ -32,6 +32,7 @@ Await every helper call. A script can make no more than ten Jira calls. The maxi
 The console offers two execution paths:
 
 1. Select **Simulate** to run against the DEMO-1 sample. Simulation records proposed writes and never changes Jira.
+   Sample search accepts only `project = DEMO` or `key = DEMO-n`. The sample transitions are `11` To Do, `31` In Progress, and `41` Done.
 2. Enter one issue key and select **Review live run** to prepare a live run.
 3. Review the exact source and issue key.
 4. Select **Run live** within five minutes.

@@ -21,7 +21,7 @@ window.MERCURY_DOCS = Object.freeze({
       name: 'jira.searchIssues',
       signature: 'jira.searchIssues(jql, options?)',
       description: 'Searches with JQL. Options can set maxResults, nextPageToken, and fields.',
-      notes: ['maxResults must be from 1 through 100.', 'Pass the returned nextPageToken to read the next page.', 'A fields list can contain at most 100 names.'],
+      notes: ['maxResults must be from 1 through 100.', 'Pass the returned nextPageToken to read the next page.', 'Simulation accepts only project = DEMO or key = DEMO-n searches. Live runs accept Jira JQL.'],
       example: "const page = await jira.searchIssues(\n  'project = MERC AND statusCategory != Done',\n  { maxResults: 25, fields: ['summary', 'status'] }\n);"
     },
     {
@@ -45,7 +45,7 @@ window.MERCURY_DOCS = Object.freeze({
       name: 'jira.getTransitions',
       signature: 'jira.getTransitions(key)',
       description: 'Returns the transitions currently available for one issue.',
-      notes: ['Transition availability depends on the issue and workflow.', 'Use the returned transition ID with transitionIssue.', 'The issue key must use Jira key format.'],
+      notes: ['Transition availability depends on the issue and workflow.', 'Simulation provides 11 To Do, 31 In Progress, and 41 Done.', 'Use the returned transition ID with transitionIssue.'],
       example: "const available = await jira.getTransitions(issue.key);\nconsole.log(available.transitions);"
     },
     {
@@ -53,7 +53,7 @@ window.MERCURY_DOCS = Object.freeze({
       name: 'jira.transitionIssue',
       signature: 'jira.transitionIssue(key, { transition, fields? })',
       description: 'Moves an issue through a transition by ID. It can set fields in the same Jira request.',
-      notes: ['transition.id is required.', 'Use getTransitions to find an available ID.', 'A completed transition cannot be rolled back by a later script error.'],
+      notes: ['transition.id is required.', 'Simulation accepts 11 To Do, 31 In Progress, and 41 Done.', 'A completed transition cannot be rolled back by a later script error.'],
       example: "await jira.transitionIssue(issue.key, {\n  transition: { id: '21' },\n  fields: { resolution: { name: 'Done' } }\n});"
     },
     {
@@ -93,9 +93,9 @@ window.MERCURY_DOCS = Object.freeze({
     { title: 'Legacy documentation', section: 'Legacy', href: './legacy.html', text: 'Server privacy terms EULA installation Groovy' }
   ],
   recipes: [
-    { title: 'Find open work', helper: 'searchIssues', source: "const page = await jira.searchIssues(\n  'project = MERC AND statusCategory != Done',\n  { maxResults: 25, fields: ['summary', 'status'] }\n);\nconsole.log(page.issues.map(item => item.key));" },
+    { title: 'Search the sample project', helper: 'searchIssues', source: "const page = await jira.searchIssues(\n  'project = DEMO',\n  { maxResults: 25, fields: ['summary', 'status'] }\n);\nconsole.log(page.issues.map(item => item.key));" },
     { title: 'Add an ADF comment', helper: 'addComment', source: "await jira.addComment(issue.key, {\n  version: 1,\n  type: 'doc',\n  content: [{ type: 'paragraph', content: [\n    { type: 'text', text: 'Checked by Mercury.' }\n  ] }]\n});" },
     { title: 'Move to a known transition', helper: 'transitionIssue', source: "const available = await jira.getTransitions(issue.key);\nconst done = available.transitions.find(item => item.name === 'Done');\nif (done) {\n  await jira.transitionIssue(issue.key, { transition: { id: done.id } });\n}" },
-    { title: 'Link related work', helper: 'linkIssues', source: "await jira.linkIssues({\n  type: { name: 'Relates' },\n  inwardIssue: { key: 'MERC-41' },\n  outwardIssue: { key: issue.key }\n});" }
+    { title: 'Link related work', helper: 'linkIssues', source: "const related = await jira.createIssue({\n  fields: {\n    project: { key: 'DEMO' },\n    issuetype: { name: 'Task' },\n    summary: 'Related sample issue'\n  }\n});\nawait jira.linkIssues({\n  type: { name: 'Relates' },\n  inwardIssue: { key: related.key },\n  outwardIssue: { key: issue.key }\n});" }
   ]
 });
