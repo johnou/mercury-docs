@@ -6,7 +6,7 @@ Mercury for JIRA allows you to extend the functionality of JIRA, executing scrip
 Product status
 --------------
 
-Mercury Cloud is in development and will replace the Server product with JavaScript workflow scripts for Jira Cloud. See [the Cloud migration notes](cloud.md).
+Mercury Cloud provides JavaScript workflow scripts for Jira Cloud. See [the Cloud documentation and migration notes](cloud.md).
 
 The Server documentation below describes the legacy product. Existing Server scripts do not run unchanged on Jira Cloud.
 

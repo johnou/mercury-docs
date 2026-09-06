@@ -16,7 +16,7 @@
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="topbar">
     <a class="brand" href="#top" aria-label="Mercury home"><svg viewBox="0 0 40 40" role="img" aria-label=""><path d="M9 27 16 8l5 12 4-8 6 15h-6l-4-10-5 13-3-3Z"/></svg><span>Mercury</span></a>
-    <nav aria-label="Primary navigation"><a href="#start">Get started</a><a href="#reference">API</a><a href="#workbench">Workbench</a><a href="#roadmap">Status</a><a href="./legacy.html">Legacy docs</a></nav>
+    <nav aria-label="Primary navigation"><a href="#start">Get started</a><a href="#reference">API</a><a href="#workbench">Workbench</a><a href="#roadmap">Features</a><a href="./legacy.html">Legacy docs</a></nav>
     <button class="search-open" type="button" data-search-open aria-haspopup="dialog"><span aria-hidden="true">⌕</span> Search <kbd>/</kbd></button>
   </header>
 
@@ -27,7 +27,7 @@
         <h1>Make the workflow do the routine work.</h1>
         <p class="lede">Mercury runs your JavaScript after a Jira transition. Scripts execute in an isolated backend runtime with a small, permission-checked Jira API.</p>
         <div class="actions"><a class="button primary" href="#start">Write your first script</a><a class="button secondary" href="#how-it-runs">See how isolation works</a></div>
-        <p class="release-note"><span class="status available">Implemented</span> Workflow post-functions with <code>jira.getIssue</code> and <code>jira.updateIssue</code> in the current development build.</p>
+        <p class="release-note">Workflow post-functions support <code>jira.getIssue</code> and <code>jira.updateIssue</code>.</p>
       </div>
       <div class="code-window" aria-label="Example Mercury script">
         <div class="window-bar"><span></span><span></span><span></span><strong>transition.js</strong></div>
@@ -54,13 +54,12 @@ console.log(<span class="str">"summary updated"</span>, issue.key);</code></pre>
     </section>
 
     <section class="section" id="start">
-      <div class="section-intro"><p class="eyebrow">Get started</p><h2>A workflow script in three steps</h2><p>Mercury Cloud is in active development. Use a Jira development site while the Cloud release is being prepared. Workflow configuration has a 32 KiB limit, so workflow source must stay slightly below 24 KiB.</p></div>
+      <div class="section-intro"><p class="eyebrow">Get started</p><h2>A workflow script in three steps</h2><p>Add Mercury to a transition, write the script, then inspect a backend simulation before saving. Workflow configuration has a 32 KiB limit, so workflow source must stay slightly below 24 KiB.</p></div>
       <ol class="steps">
-        <li><span>01</span><div><h3>Open a transition</h3><p>Edit a company-managed or team-managed workflow. Select the transition that needs automation.</p></div></li>
-        <li><span>02</span><div><h3>Add Mercury script</h3><p>Add the Mercury post-function. Write JavaScript against the documented context and helpers. Write template literals normally; Mercury preserves expressions such as <code>${status}</code>.</p></div></li>
-        <li><span>03</span><div><h3>Validate and simulate</h3><p>Mercury checks and simulates the script on its backend. Review recorded updates before you save the rule.</p></div></li>
+        <li><h3>Open a transition</h3><p>Edit a company-managed or team-managed workflow. Select the transition that needs automation.</p></li>
+        <li><h3>Add a Mercury script</h3><p>Add the Mercury post-function and write JavaScript with the documented context and helpers. Template strings work normally.</p></li>
+        <li><h3>Validate and simulate</h3><p>Mercury checks and simulates the script on its backend. Review recorded updates before you save the rule.</p></li>
       </ol>
-      <aside class="callout"><strong>Development preview.</strong> Installation is limited to the private Mercury demo site. Workflow scripts, including template strings, and the Console, Scripts, History, and Listeners views have passed live verification. Scheduled Jobs remain in verification. The Cloud app is not available for public installation.</aside>
     </section>
 
     <section class="section split" id="how-it-runs">
@@ -103,7 +102,7 @@ console.log(<span class="str">"summary updated"</span>, issue.key);</code></pre>
     </section>
 
     <section class="section" id="workbench">
-      <div class="section-intro"><p class="eyebrow">Development preview</p><h2>Use the automation workbench</h2><p>Jira administrators can open five connected views. The backend checks Jira administrator permission for every action.</p></div>
+      <div class="section-intro"><p class="eyebrow">Automation workbench</p><h2>Build, run, and monitor scripts</h2><p>Jira administrators can open five connected views. The backend checks Jira administrator permission for every action.</p></div>
       <div class="guide-grid">
         <article><span>Console</span><h3>Simulate, then confirm a live run</h3><ol><li>Write a script of 24 KiB or less.</li><li>Select <strong>Simulate</strong> to use the DEMO-1 sample. Simulation records writes and never changes Jira.</li><li>Enter one issue key and select <strong>Review live run</strong>.</li><li>Check the exact source and issue key. Select <strong>Run live</strong> before the one-use confirmation expires after five minutes.</li></ol><p>In simulation, search accepts only <code>project = DEMO</code> or <code>key = DEMO-n</code>. Sample transitions are <code>11</code> To Do, <code>31</code> In Progress, and <code>41</code> Done.</p><p>Mercury consumes the confirmation and creates the running history record in one atomic operation. Live console runs use the Mercury app identity.</p></article>
         <article><span>Scripts</span><h3>Save and pin revisions</h3><ol><li>Select <strong>Save revision</strong> to create an immutable revision.</li><li>Open <strong>Scripts</strong> to review or load an older revision.</li><li>Choose a saved revision when you create a listener or scheduled job.</li></ol><p>An automation stays pinned to that revision. Archiving a script prevents new enables, but it does not disable automations that already use the revision.</p></article>
@@ -114,7 +113,7 @@ console.log(<span class="str">"summary updated"</span>, issue.key);</code></pre>
     </section>
 
     <section class="section delivery" id="automation-delivery">
-      <div class="section-intro"><p class="eyebrow">Automation delivery</p><h2>Bounded work with visible tradeoffs</h2><p>The development preview favors loop protection and an auditable result over automatic replay.</p></div>
+      <div class="section-intro"><p class="eyebrow">Automation delivery</p><h2>Bounded work with visible tradeoffs</h2><p>Mercury uses loop protection and records an auditable result without automatically replaying failed work.</p></div>
       <div class="delivery-grid">
         <article><strong>25 definitions</strong><p>An installation can store up to 25 listener and scheduled-job definitions. Up to five can be enabled at once.</p></article>
         <article><strong>30-day identity</strong><p>Mercury deduplicates each automation and event or schedule bucket for 30 days. Editing or toggling it does not clear that claim.</p></article>
@@ -129,9 +128,8 @@ console.log(<span class="str">"summary updated"</span>, issue.key);</code></pre>
     </section>
 
     <section class="section" id="roadmap">
-      <div class="section-intro roadmap-head"><div><p class="eyebrow">Feature availability</p><h2>What is built, and where you can use it</h2></div><div class="legend"><span class="status available">Implemented</span><span class="status testing">Development preview</span></div></div>
+      <div class="section-intro"><p class="eyebrow">Cloud features</p><h2>What you can do with Mercury</h2></div>
       <div class="feature-grid" data-feature-grid></div>
-      <p class="roadmap-note">Development-preview features are implemented on the private demo site. Scheduled delivery continues through live verification. This is not a public release, and Mercury does not claim full ScriptRunner feature parity.</p>
     </section>
 
     <section class="section" id="migration">

@@ -66,14 +66,14 @@ window.MERCURY_DOCS = Object.freeze({
     }
   ],
   features: [
-    { name: 'Workflow JavaScript', status: 'available', detail: 'Run isolated JavaScript, including template strings, after Jira Cloud transitions.' },
-    { name: 'Backend validation and simulation', status: 'available', detail: 'Validate and simulate in Forge without browser eval or WebAssembly.' },
-    { name: 'Script console', status: 'testing', detail: 'Simulate safely or confirm one live app-identity run against an issue.' },
-    { name: 'Saved script library', status: 'testing', detail: 'Save indexed immutable revisions, load source, and archive or restore scripts.' },
-    { name: 'Run history', status: 'testing', detail: 'Inspect console, workflow, listener, and job runs for 30 days; select Refresh for new entries.' },
-    { name: 'Eight Jira helpers', status: 'testing', detail: 'Read, search, create, update, comment, transition, and link issues.' },
-    { name: 'Event listeners', status: 'testing', detail: 'Run a pinned revision for issue-created or issue-updated events in one project.' },
-    { name: 'Scheduled jobs', status: 'testing', detail: 'Implemented with an hourly job awaiting its first Forge platform tick.' }
+    { name: 'Workflow JavaScript', detail: 'Run isolated JavaScript, including template strings, after Jira Cloud transitions.' },
+    { name: 'Backend validation and simulation', detail: 'Validate and simulate in Forge without browser eval or WebAssembly.' },
+    { name: 'Script console', detail: 'Simulate safely or confirm one live app-identity run against an issue.' },
+    { name: 'Saved script library', detail: 'Save indexed immutable revisions, load source, and archive or restore scripts.' },
+    { name: 'Run history', detail: 'Inspect console, workflow, listener, and job runs for 30 days; select Refresh for new entries.' },
+    { name: 'Eight Jira helpers', detail: 'Read, search, create, update, comment, transition, and link issues.' },
+    { name: 'Event listeners', detail: 'Run a pinned revision for issue-created or issue-updated events in one project.' },
+    { name: 'Scheduled jobs', detail: 'Run a pinned revision hourly, daily, or weekly against one issue.' }
   ],
   search: [
     { title: 'Write your first script', section: 'Get started', href: '#start', text: 'workflow transition add post function validate simulate JavaScript' },
@@ -88,7 +88,7 @@ window.MERCURY_DOCS = Object.freeze({
     { title: 'jira.linkIssues', section: 'API', href: '#reference', text: 'link inward outward issue key type helper' },
     { title: 'Use the workbench', section: 'How-to', href: '#workbench', text: 'console saved scripts revisions archive live run confirmation history refresh listeners scheduled jobs' },
     { title: 'Automation limits and delivery', section: 'How-to', href: '#automation-delivery', text: '25 five deduplication self generated trace retry partial writes hourly daily weekly UTC' },
-    { title: 'Feature availability', section: 'Roadmap', href: '#roadmap', text: 'console saved scripts library history helpers listeners scheduled jobs development preview private demo' },
+    { title: 'Cloud features', section: 'Features', href: '#roadmap', text: 'console saved scripts library history helpers listeners scheduled jobs available behavior' },
     { title: 'Move from Server', section: 'Migration', href: '#migration', text: 'Groovy JavaScript JVM Cloud port migrate fix versions' },
     { title: 'Legacy documentation', section: 'Legacy', href: './legacy.html', text: 'Server privacy terms EULA installation Groovy' }
   ],

@@ -32,7 +32,6 @@ function renderApi(selectedId) {
 function renderFeatures() {
   document.querySelector('[data-feature-grid]').innerHTML = docs.features.map(feature => `
     <article class="feature-card">
-      <span class="status ${feature.status}">${feature.status === 'available' ? 'Implemented' : feature.status === 'testing' ? 'Development preview' : feature.status}</span>
       <h3>${escapeHtml(feature.name)}</h3>
       <p>${escapeHtml(feature.detail)}</p>
     </article>

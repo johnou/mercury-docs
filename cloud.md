@@ -1,16 +1,8 @@
 # Mercury Cloud
 
-Mercury Cloud runs JavaScript after Jira Cloud workflow transitions. The development build also has an administrator workbench for console runs, saved scripts, history, listeners, and scheduled jobs.
+Mercury Cloud runs JavaScript after Jira Cloud workflow transitions. Its administrator workbench provides console runs, saved scripts, history, listeners, and scheduled jobs.
 
 Mercury uses Atlassian Forge and a backend QuickJS runtime. Guest scripts receive Jira data and named helpers. They do not receive Forge credentials, Node.js globals, arbitrary network access, or filesystem access.
-
-## Availability
-
-Workflow post-functions, backend validation and simulation, the workbench, and all eight Jira helpers are implemented as a development preview on the private Mercury demo site.
-
-Workflow scripts, including template strings, and console, library, archive, restore, history, and listener behavior have passed live verification. Scheduled delivery remains in verification.
-
-Mercury Cloud is not available for public installation. It does not claim full ScriptRunner feature parity.
 
 ## Jira helpers
 
