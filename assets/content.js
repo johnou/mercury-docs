@@ -66,14 +66,14 @@ window.MERCURY_DOCS = Object.freeze({
     }
   ],
   features: [
-    { name: 'Workflow JavaScript', status: 'available', detail: 'Store and run isolated JavaScript after Jira Cloud transitions; template-literal verification is in progress.' },
+    { name: 'Workflow JavaScript', status: 'available', detail: 'Run isolated JavaScript, including template strings, after Jira Cloud transitions.' },
     { name: 'Backend validation and simulation', status: 'available', detail: 'Validate and simulate in Forge without browser eval or WebAssembly.' },
     { name: 'Script console', status: 'testing', detail: 'Simulate safely or confirm one live app-identity run against an issue.' },
-    { name: 'Saved script library', status: 'testing', detail: 'Save immutable revisions and load their source into the console.' },
-    { name: 'Run history', status: 'testing', detail: 'Live verified for console, workflow, and listener runs; select Refresh to load new entries.' },
+    { name: 'Saved script library', status: 'testing', detail: 'Save indexed immutable revisions, load source, and archive or restore scripts.' },
+    { name: 'Run history', status: 'testing', detail: 'Inspect console, workflow, listener, and job runs for 30 days; select Refresh for new entries.' },
     { name: 'Eight Jira helpers', status: 'testing', detail: 'Read, search, create, update, comment, transition, and link issues.' },
-    { name: 'Event listeners', status: 'testing', detail: 'Two live listener deliveries are verified; run pinned revisions for one project.' },
-    { name: 'Scheduled jobs', status: 'testing', detail: 'An hourly job is enabled and awaiting its first Forge platform tick.' }
+    { name: 'Event listeners', status: 'testing', detail: 'Run a pinned revision for issue-created or issue-updated events in one project.' },
+    { name: 'Scheduled jobs', status: 'testing', detail: 'Implemented with an hourly job awaiting its first Forge platform tick.' }
   ],
   search: [
     { title: 'Write your first script', section: 'Get started', href: '#start', text: 'workflow transition add post function validate simulate JavaScript' },

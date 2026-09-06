@@ -6,9 +6,9 @@ Mercury uses Atlassian Forge and a backend QuickJS runtime. Guest scripts receiv
 
 ## Availability
 
-Workflow post-functions and backend validation and simulation are implemented. The workbench and all eight Jira helpers are implemented as a development preview. Live verification continues on the private Mercury demo site.
+Workflow post-functions, backend validation and simulation, the workbench, and all eight Jira helpers are implemented as a development preview on the private Mercury demo site.
 
-Live console saving, execution, and a label update are verified. History shows successful console, workflow, and listener runs. Two listener deliveries are verified, and the read-only proof listener is now disabled. An hourly job is saved and enabled while it awaits its first Forge platform tick. Workflow configuration storage is verified; template-literal execution and script-library indexing remain under investigation.
+Workflow scripts, including template strings, and console, library, archive, restore, history, and listener behavior have passed live verification. Scheduled delivery remains in verification.
 
 Mercury Cloud is not available for public installation. It does not claim full ScriptRunner feature parity.
 
@@ -27,7 +27,7 @@ Workflow and workbench scripts can call:
 
 Await every helper call. A script can make no more than ten Jira calls. Workbench scripts can use up to 24 KiB. A workflow configuration has a 32 KiB limit, so workflow source must stay slightly below 24 KiB. Jira writes that finish before a later failure cannot be rolled back.
 
-Write JavaScript template literals normally. The current configuration format preserves expressions such as `${status}` without special escaping. End-to-end template-literal execution in a workflow is still under verification.
+Write JavaScript template literals normally. Mercury preserves expressions such as `${status}` without special escaping.
 
 ## Use the console
 
