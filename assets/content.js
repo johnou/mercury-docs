@@ -66,7 +66,7 @@ window.MERCURY_DOCS = Object.freeze({
     }
   ],
   features: [
-    { name: 'Workflow JavaScript', status: 'available', detail: 'Run isolated JavaScript after Jira Cloud transitions.' },
+    { name: 'Workflow JavaScript', status: 'available', detail: 'Store and run isolated JavaScript after Jira Cloud transitions; template-literal verification is in progress.' },
     { name: 'Backend validation and simulation', status: 'available', detail: 'Validate and simulate in Forge without browser eval or WebAssembly.' },
     { name: 'Script console', status: 'testing', detail: 'Simulate safely or confirm one live app-identity run against an issue.' },
     { name: 'Saved script library', status: 'testing', detail: 'Save immutable revisions and load their source into the console.' },

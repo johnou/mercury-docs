@@ -8,7 +8,7 @@ Mercury uses Atlassian Forge and a backend QuickJS runtime. Guest scripts receiv
 
 Workflow post-functions and backend validation and simulation are implemented. The workbench and all eight Jira helpers are implemented as a development preview. Live verification continues on the private Mercury demo site.
 
-A backend workflow invocation on MERC-1 completed in 2.155 seconds with two Jira calls. The sample content and saved script still await final verification.
+Live console saving, execution, and a label update are verified. Workflow configuration storage is also verified. Template-literal execution is undergoing its final check, and index and history verification continues.
 
 Mercury Cloud is not available for public installation. It does not claim full ScriptRunner feature parity.
 
@@ -25,7 +25,9 @@ Workflow and workbench scripts can call:
 - `jira.transitionIssue(key, { transition, fields? })`
 - `jira.linkIssues({ type, inwardIssue, outwardIssue })`
 
-Await every helper call. A script can make no more than ten Jira calls. The maximum script size is 24 KiB. Jira writes that finish before a later failure cannot be rolled back.
+Await every helper call. A script can make no more than ten Jira calls. Workbench scripts can use up to 24 KiB. A workflow configuration has a 32 KiB limit, so workflow source must stay slightly below 24 KiB. Jira writes that finish before a later failure cannot be rolled back.
+
+Write JavaScript template literals normally. Mercury preserves expressions such as `${status}` when it stores workflow configuration; no special escaping is required.
 
 ## Use the console
 
@@ -67,7 +69,7 @@ Mercury skips events marked `selfGenerated` and events with a Mercury trace valu
 
 Created events use the Jira issue ID as their stable identity. Updated events require both the issue ID and a changelog ID. Mercury skips an updated event when the changelog identity is missing. It also drops an event whose timestamp is more than 24 hours from receipt.
 
-Mercury keeps successful event claims for 30 days to suppress duplicates. A claim uses the automation ID and stable event identity. Editing, disabling, or re-enabling the listener does not run the same claimed event again. This does not make Jira writes exactly once.
+Mercury keeps event claims for 30 days to suppress duplicates, including claims for runs that later fail. A claim uses the automation ID and stable event identity. Editing, disabling, or re-enabling the listener does not run the same claimed event again. This does not make Jira writes exactly once.
 
 ## Create a scheduled job
 
