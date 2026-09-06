@@ -33,11 +33,13 @@ The console offers two execution paths:
 
 The live confirmation token works once. Mercury consumes the token and creates the running history record in one atomic operation. Live console runs execute with the Mercury app identity. The backend checks that the current user is a Jira administrator before it creates the token or runs the script.
 
-## Dry run with a real issue
+Sample simulation is subject to the same installation usage limits as other admitted runs.
 
-A Jira administrator can dry run source against one real issue. Mercury reads current Jira data with the app identity. Read helpers call Jira. Write helpers validate their arguments and append to `proposedWrites` without sending a write request.
+## Dry-run a real issue
 
-A dry run can show how the script behaves with current issue data. It does not prove that Jira permissions, workflow conditions, or field rules would accept the proposed writes in a live run.
+A Jira administrator can select **Dry-run real issue** to run source against one real issue. Mercury reads current Jira data with the app identity. Read helpers call Jira. Write helpers validate their arguments and append to `proposedWrites` without sending a write request.
+
+A dry run can show how the script behaves with current issue data. It does not prove that Jira permissions, workflow conditions, or field rules would accept the proposed writes in a live run. The immediate result includes proposed writes, but retained history contains bounded logs and outcome metadata rather than Jira response values or proposed-write payloads.
 
 ## Save scripts and revisions
 
@@ -87,19 +89,19 @@ The claim uses the automation ID and bucket identity. Editing, disabling, or re-
 
 Mercury admits at most 100 runs per installation in one UTC hour and 10,000 runs in one UTC month. A Jira administrator can lower either limit. The server caps cannot be raised.
 
-An admitted run counts even when it later fails. Duplicate or rejected runs do not count. These counters limit app executions. They are not a spending meter or billing ledger, and Forge can still charge platform overhead for invocations and admission checks.
+An admitted run counts even when it later fails. Sample simulations also count. Duplicate or rejected runs do not count. These counters limit app executions. They are not a spending meter or billing ledger, and Forge can still charge platform overhead for invocations and admission checks.
 
 Emergency pause blocks new workflow, console, dry-run, listener, and scheduled admissions. It does not cancel a run that already started. A scheduled job rejected while paused or over limit is not replayed automatically.
 
 ## Read automation health
 
-Usage & health shows the latest bounded success or failure for workflows and each automation. It also reports failures that happen before normal run history starts. Health storage is best effort and never retries a script.
+**Usage & health** shows the latest bounded success or failure for workflows and each automation. It also reports failures that happen before normal run history starts. Health records expire after 400 days. Health storage is best effort and never retries a script. Mercury records the Atlassian account ID of the administrator who last changed usage limits or pause state.
 
 ## Back up configuration
 
-Backup exports current scripts, source snapshots required by pinned revisions, and up to 25 automation definitions. A bundle can contain at most 10 source entries and 256 KiB of UTF-8 JSON. It excludes history, logs, account IDs, delivery claims, confirmations, usage, health, pause state, license state, and installation identifiers.
+**Backup** can export configuration while automations are enabled, but every automation in the emitted bundle is disabled. The bundle includes each script's current source, including an archived current source, plus older source snapshots required by pinned automations. It can contain at most 10 source snapshots, 25 automation definitions, and 256 KiB of UTF-8 JSON. It excludes history, logs, account IDs, delivery claims, confirmations, usage, health, pause state, license state, and installation identifiers.
 
-Restore validates the complete bundle before writing. It creates new local IDs, keeps every imported automation disabled, and makes repeated import of the same bundle idempotent. Review imported source and settings before enabling an automation.
+Restore validates the complete bundle before writing. It creates each source snapshot as a new standalone script with a new local ID rather than recreating a script's complete revision chain. Imported automations also receive new IDs and remain disabled. Repeating the same bundle import is idempotent while the app is installed; reusing its bundle ID with changed content is rejected. Review imported source and settings before enabling an automation.
 
 ## Automation limits and failure behavior
 

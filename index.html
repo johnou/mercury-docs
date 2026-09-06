@@ -9,7 +9,7 @@
   <meta property="og:description" content="Write focused JavaScript automation for Jira Cloud workflows.">
   <title>Mercury for Jira Cloud</title>
   <link rel="stylesheet" href="./assets/site.css?v=88810bb0ca61">
-  <script src="./assets/content.js?v=38b13bd46bc3" defer></script>
+  <script src="./assets/content.js?v=58f0be5f268d" defer></script>
   <script src="./assets/site.js?v=78b6e7a4508e" defer></script>
 </head>
 <body>
@@ -116,7 +116,7 @@ console.log(<span class="str">"summary updated"</span>, issue.key);</code></pre>
       <div class="section-intro"><p class="eyebrow">Safe operations</p><h2>Know what runs before it writes</h2><p>Mercury gives Jira administrators a read-only path for real issue data, installation controls, recent health, and portable configuration.</p></div>
       <ul class="launch-checklist" aria-label="Administrator onboarding">
         <li><strong>Set limits.</strong><span>Open Usage &amp; health. Review hourly and monthly limits and the emergency pause.</span></li>
-        <li><strong>Test safely.</strong><span>Start with sample simulation, then dry run against one real issue before a live write.</span></li>
+        <li><strong>Test safely.</strong><span>Start with sample simulation, then select Dry-run real issue before a live write.</span></li>
         <li><strong>Review automation.</strong><span>Save an immutable revision. Check its event, project, issue, and interval before enabling it.</span></li>
         <li><strong>Keep a backup.</strong><span>Export configuration after a reviewed change. Restored automations stay disabled.</span></li>
       </ul>
@@ -125,10 +125,10 @@ console.log(<span class="str">"summary updated"</span>, issue.key);</code></pre>
         <div class="mode-panel" role="tabpanel" data-mode-panel></div>
       </div>
       <div class="operations-grid">
-        <article><span>Real issue dry run</span><h3>Read Jira, intercept writes</h3><p>Choose one issue and run with app-authorized real Jira reads. Mercury records proposed writes without sending them. A dry run cannot prove Jira would accept those writes.</p></article>
-        <article><span>Usage controls</span><h3>Bound each installation</h3><p>Mercury admits at most 100 runs per UTC hour and 10,000 per UTC month. Administrators can lower those limits or pause new runs. In-flight runs continue.</p></article>
+        <article><span>Dry-run real issue</span><h3>Read Jira, intercept writes</h3><p>Choose one issue and run with app-authorized real Jira reads. Mercury returns proposed writes without sending them. Retained history excludes proposed writes and Jira response values. A dry run cannot prove Jira would accept those writes.</p></article>
+        <article><span>Usage &amp; health</span><h3>Bound each installation</h3><p>Mercury admits at most 100 runs per UTC hour and 10,000 per UTC month. Sample simulations count. Administrators can lower those limits or pause new runs. In-flight runs continue.</p></article>
         <article><span>Automation health</span><h3>See the latest outcome</h3><p>Health shows the latest success or failure for workflows and automations, including failures that happen before a normal history record starts.</p></article>
-        <article><span>Backup</span><h3>Move reviewed definitions</h3><p>Export current and pinned source snapshots with up to 25 automation definitions. Import creates new local IDs and keeps every imported automation disabled for review.</p></article>
+        <article><span>Backup</span><h3>Move reviewed definitions</h3><p>Export current source and older snapshots pinned by automations, with up to 25 definitions. The bundle emits definitions disabled. Import creates standalone scripts and automations with new local IDs.</p></article>
       </div>
     </section>
 

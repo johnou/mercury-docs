@@ -74,14 +74,14 @@ window.MERCURY_DOCS = Object.freeze({
     { name: 'Eight Jira helpers', detail: 'Read, search, create, update, comment, transition, and link issues.' },
     { name: 'Event listeners', detail: 'Run a pinned revision for issue-created or issue-updated events in one project.' },
     { name: 'Scheduled jobs', detail: 'Run a pinned revision hourly, daily, or weekly against one issue.' },
-    { name: 'Real issue dry run', detail: 'Read current Jira data while Mercury intercepts and records every proposed write.' },
+    { name: 'Dry-run real issue', detail: 'Read current Jira data while Mercury intercepts and returns every proposed write.' },
     { name: 'Usage and pause controls', detail: 'Lower hourly or monthly run limits and pause new admissions without hiding history.' },
     { name: 'Automation health', detail: 'Inspect the latest success or failure, including errors before execution starts.' },
-    { name: 'Backup and restore', detail: 'Move current and pinned source snapshots while importing every automation disabled.' }
+    { name: 'Backup and restore', detail: 'Move current and pinned source snapshots as standalone imported scripts with disabled automations.' }
   ],
   modes: [
-    { id: 'sample', name: 'Sample simulation', reads: 'DEMO sample data', writes: 'Recorded only', confirmation: 'Not required', history: 'Not retained', note: 'Use this first to check syntax and payload shape.' },
-    { id: 'dryrun', name: 'Real issue dry run', reads: 'Current Jira data as app', writes: 'Intercepted and recorded', confirmation: 'Jira administrator', history: 'Retained for 30 days', note: 'Use this to inspect proposed writes. Jira does not validate or accept those writes.' },
+    { id: 'sample', name: 'Sample simulation', reads: 'DEMO sample data', writes: 'Returned only', confirmation: 'Not required', history: 'Logs retained for 30 days', note: 'Counts toward usage limits. Use this first to check syntax and payload shape.' },
+    { id: 'dryrun', name: 'Dry-run real issue', reads: 'Current Jira data as app', writes: 'Intercepted and returned', confirmation: 'Jira administrator', history: 'Logs retained for 30 days', note: 'Proposed writes and Jira response values are excluded from retained history. Jira does not validate or accept those writes.' },
     { id: 'live', name: 'Live console run', reads: 'Current Jira data', writes: 'Sent to Jira', confirmation: 'One use, five minutes', history: 'Retained for 30 days', note: 'Review the exact source and issue key before you confirm.' },
     { id: 'automatic', name: 'Listener or job', reads: 'Current Jira data', writes: 'Sent to Jira', confirmation: 'Enabled definition', history: 'Retained for 30 days', note: 'The pinned revision runs within installation limits. A rejected job is not replayed automatically.' }
   ],
