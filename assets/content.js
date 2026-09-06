@@ -70,10 +70,10 @@ window.MERCURY_DOCS = Object.freeze({
     { name: 'Backend validation and simulation', status: 'available', detail: 'Validate and simulate in Forge without browser eval or WebAssembly.' },
     { name: 'Script console', status: 'testing', detail: 'Simulate safely or confirm one live app-identity run against an issue.' },
     { name: 'Saved script library', status: 'testing', detail: 'Save immutable revisions and load their source into the console.' },
-    { name: 'Run history', status: 'testing', detail: 'Inspect outcomes, duration, Jira calls, and bounded logs for 30 days.' },
+    { name: 'Run history', status: 'testing', detail: 'Live verified for console, workflow, and listener runs; select Refresh to load new entries.' },
     { name: 'Eight Jira helpers', status: 'testing', detail: 'Read, search, create, update, comment, transition, and link issues.' },
-    { name: 'Event listeners', status: 'testing', detail: 'Run pinned revisions for issue-created or issue-updated events in one project.' },
-    { name: 'Scheduled jobs', status: 'testing', detail: 'Run a pinned revision hourly, daily, or weekly against one issue.' }
+    { name: 'Event listeners', status: 'testing', detail: 'Two live listener deliveries are verified; run pinned revisions for one project.' },
+    { name: 'Scheduled jobs', status: 'testing', detail: 'An hourly job is enabled and awaiting its first Forge platform tick.' }
   ],
   search: [
     { title: 'Write your first script', section: 'Get started', href: '#start', text: 'workflow transition add post function validate simulate JavaScript' },
@@ -86,7 +86,7 @@ window.MERCURY_DOCS = Object.freeze({
     { title: 'jira.getTransitions', section: 'API', href: '#reference', text: 'available issue workflow transitions helper' },
     { title: 'jira.transitionIssue', section: 'API', href: '#reference', text: 'move issue transition ID fields helper' },
     { title: 'jira.linkIssues', section: 'API', href: '#reference', text: 'link inward outward issue key type helper' },
-    { title: 'Use the workbench', section: 'How-to', href: '#workbench', text: 'console saved scripts revisions archive live run confirmation history listeners scheduled jobs' },
+    { title: 'Use the workbench', section: 'How-to', href: '#workbench', text: 'console saved scripts revisions archive live run confirmation history refresh listeners scheduled jobs' },
     { title: 'Automation limits and delivery', section: 'How-to', href: '#automation-delivery', text: '25 five deduplication self generated trace retry partial writes hourly daily weekly UTC' },
     { title: 'Feature availability', section: 'Roadmap', href: '#roadmap', text: 'console saved scripts library history helpers listeners scheduled jobs development preview private demo' },
     { title: 'Move from Server', section: 'Migration', href: '#migration', text: 'Groovy JavaScript JVM Cloud port migrate fix versions' },

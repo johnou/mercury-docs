@@ -8,7 +8,7 @@ Mercury uses Atlassian Forge and a backend QuickJS runtime. Guest scripts receiv
 
 Workflow post-functions and backend validation and simulation are implemented. The workbench and all eight Jira helpers are implemented as a development preview. Live verification continues on the private Mercury demo site.
 
-Live console saving, execution, and a label update are verified. Workflow configuration storage is also verified. Template-literal execution is undergoing its final check, and index and history verification continues.
+Live console saving, execution, and a label update are verified. History shows successful console, workflow, and listener runs. Two listener deliveries are verified, and the read-only proof listener is now disabled. An hourly job is saved and enabled while it awaits its first Forge platform tick. Workflow configuration storage is verified; template-literal execution and script-library indexing remain under investigation.
 
 Mercury Cloud is not available for public installation. It does not claim full ScriptRunner feature parity.
 
@@ -27,7 +27,7 @@ Workflow and workbench scripts can call:
 
 Await every helper call. A script can make no more than ten Jira calls. Workbench scripts can use up to 24 KiB. A workflow configuration has a 32 KiB limit, so workflow source must stay slightly below 24 KiB. Jira writes that finish before a later failure cannot be rolled back.
 
-Write JavaScript template literals normally. Mercury preserves expressions such as `${status}` when it stores workflow configuration; no special escaping is required.
+Write JavaScript template literals normally. The current configuration format preserves expressions such as `${status}` without special escaping. End-to-end template-literal execution in a workflow is still under verification.
 
 ## Use the console
 
@@ -49,7 +49,7 @@ Listeners and scheduled jobs pin one revision ID. A later script save does not c
 
 ## Read run history
 
-The **History** view retains records for 30 days. Each record includes the origin, issue key, start time, duration, Jira call count, logs, and any failure code.
+The **History** view retains records for 30 days. Open **History**, then select **Refresh** to load runs completed since the page opened. Each record includes the origin, issue key, start time, duration, Jira call count, logs, and any failure code.
 
 A record can remain `running` if the Forge invocation crashes after Mercury writes the initial history entry. In that case, the Jira outcome is uncertain. Mercury does not retry the run automatically.
 
