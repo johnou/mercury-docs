@@ -32,11 +32,21 @@ function renderApi(selectedId) {
 function renderFeatures() {
   document.querySelector('[data-feature-grid]').innerHTML = docs.features.map(feature => `
     <article class="feature-card">
-      <span class="status ${feature.status}">${feature.status === 'available' ? 'Implemented' : feature.status === 'testing' ? 'In testing' : feature.status}</span>
+      <span class="status ${feature.status}">${feature.status === 'available' ? 'Implemented' : feature.status === 'testing' ? 'Development preview' : feature.status}</span>
       <h3>${escapeHtml(feature.name)}</h3>
       <p>${escapeHtml(feature.detail)}</p>
     </article>
   `).join('');
+}
+
+function renderRecipe(selectedTitle) {
+  const selected = docs.recipes.find(recipe => recipe.title === selectedTitle) || docs.recipes[0];
+  document.querySelector('[data-recipe-tabs]').innerHTML = docs.recipes.map(recipe =>
+    `<button type="button" aria-pressed="${recipe.title === selected.title}" data-recipe="${escapeHtml(recipe.title)}">${escapeHtml(recipe.title)}</button>`
+  ).join('');
+  document.querySelector('[data-recipe-source]').textContent = selected.source;
+  document.querySelectorAll('[data-recipe]').forEach(button => button.addEventListener('click', () => renderRecipe(button.dataset.recipe)));
+  document.querySelector('[data-copy-recipe]').onclick = event => copyText(selected.source, event.currentTarget);
 }
 
 function renderExample(form) {
@@ -103,6 +113,7 @@ if (legacyAnchors.has(location.hash.slice(1))) {
   location.replace(`./legacy.html${location.hash}`);
 } else {
   renderApi(docs.helpers[0].id);
+  renderRecipe(docs.recipes[0].title);
   renderFeatures();
   const exampleForm = document.querySelector('[data-example-form]');
   exampleForm.addEventListener('submit', event => {

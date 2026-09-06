@@ -1,28 +1,88 @@
 # Mercury Cloud
 
-Mercury Cloud runs JavaScript after Jira Cloud workflow transitions. The current development build uses Atlassian Forge and a backend QuickJS runtime. Guest scripts receive Jira data and named helpers. They do not receive Forge credentials, Node.js globals, arbitrary network access, or filesystem access.
+Mercury Cloud runs JavaScript after Jira Cloud workflow transitions. The development build also has an administrator workbench for console runs, saved scripts, history, listeners, and scheduled jobs.
 
-The first implemented helpers are:
+Mercury uses Atlassian Forge and a backend QuickJS runtime. Guest scripts receive Jira data and named helpers. They do not receive Forge credentials, Node.js globals, arbitrary network access, or filesystem access.
+
+## Availability
+
+Workflow post-functions and backend validation and simulation are implemented. The workbench and all eight Jira helpers are implemented as a development preview. Live verification continues on the private Mercury demo site.
+
+Mercury Cloud is not available for public installation. It does not claim full ScriptRunner feature parity.
+
+## Jira helpers
+
+Workflow and workbench scripts can call:
 
 - `jira.getIssue(key)`
 - `jira.updateIssue(key, { fields })`
+- `jira.searchIssues(jql, options?)`
+- `jira.createIssue({ fields })`
+- `jira.addComment(key, adfDocument)`
+- `jira.getTransitions(key)`
+- `jira.transitionIssue(key, { transition, fields? })`
+- `jira.linkIssues({ type, inwardIssue, outwardIssue })`
 
-Backend validation and simulation run in Forge. The editor uses Forge functions for both operations, so it works with Forge's default browser content security policy.
+Await every helper call. A script can make no more than ten Jira calls. The maximum script size is 24 KiB. Jira writes that finish before a later failure cannot be rolled back.
 
-## Feature availability
+## Use the console
 
-Workflow post-functions, backend validation, backend simulation, and the two helpers above are implemented in the current development build. The Cloud app is not available for public installation yet.
+The console offers two execution paths:
 
-The following features are planned. Their names and APIs can change before release:
+1. Select **Simulate** to run against the DEMO-1 sample. Simulation records proposed writes and never changes Jira.
+2. Enter one issue key and select **Review live run** to prepare a live run.
+3. Review the exact source and issue key.
+4. Select **Run live** within five minutes.
 
-- A script console
-- A saved script library
-- Run history
-- More task-oriented Jira helpers
-- Jira event listeners
-- Scheduled jobs
+The live confirmation token works once. Live console runs execute with the Mercury app identity. The backend checks that the current user is a Jira administrator before it creates the token or runs the script.
 
-Mercury does not claim full ScriptRunner feature parity.
+## Save scripts and revisions
+
+Select **Save revision** to create an immutable source revision. Loading a saved script copies its source into the console editor. Saving the edited source creates another immutable revision.
+
+Listeners and scheduled jobs pin one revision ID. A later script save does not change existing automation. Archiving a script prevents an automation from being newly enabled against it. Archive does not disable an automation that already uses one of its revisions.
+
+## Read run history
+
+The **History** view retains records for 30 days. Each record includes the origin, issue key, start time, duration, Jira call count, logs, and any failure code.
+
+A record can remain `running` if the Forge invocation crashes after Mercury writes the initial history entry. In that case, the Jira outcome is uncertain. Mercury does not retry the run automatically.
+
+## Create a listener
+
+A listener runs a saved revision when Jira creates or updates an issue in one required project:
+
+1. Open **Listeners**.
+2. Choose **Issue created** or **Issue updated**.
+3. Enter the project key and select a saved revision.
+4. Save the listener. New listeners start disabled.
+5. Review the settings, then enable the listener.
+
+Mercury skips events marked `selfGenerated` and events with a Mercury trace value. This stops direct automation loops.
+
+Created events use the Jira issue ID as their stable identity. Updated events require both the issue ID and a changelog ID. Mercury skips an updated event when the changelog identity is missing. It also drops an event whose timestamp is more than 24 hours from receipt.
+
+Mercury keeps successful event claims for 30 days to suppress duplicates. This does not make Jira writes exactly once.
+
+## Create a scheduled job
+
+A scheduled job runs a saved revision against one issue:
+
+1. Open **Scheduled jobs**.
+2. Enter one issue key and select a saved revision.
+3. Choose **Every hour**, **Every day**, or **Every week**.
+4. Save the job. New jobs start disabled.
+5. Review the settings, then enable the job.
+
+One coarse hourly Forge trigger checks all enabled jobs. Intervals use 1, 24, or 168-hour UTC epoch buckets. The first trigger after enablement can run a job. If Forge misses intervals, Mercury coalesces them into the current bucket instead of replaying every missed run.
+
+Editing an enabled job creates a new automation version. The new version can run again in the same bucket because the automation version forms part of the deduplication identity.
+
+## Automation limits and failure behavior
+
+Each installation can store 25 listener and scheduled-job definitions. Five definitions can be enabled at once.
+
+Mercury does not retry failed automation runs. A script can leave partial Jira writes when one helper succeeds and a later helper fails. The 30-day claim blocks a known duplicate dispatch, but Mercury does not promise exactly-once effects.
 
 ## Moving from Server
 

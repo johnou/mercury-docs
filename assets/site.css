@@ -132,6 +132,34 @@ pre { margin: 0; overflow: auto; }
 .context-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 22px; }
 .context-grid article { padding: 22px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.4); }
 .context-grid h3 { margin: 0 0 8px; }
+.recipes { position: relative; margin-top: 22px; padding: 25px; border-radius: var(--radius); color: #d5e3de; background: var(--night); }
+.recipes-head { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.recipes-head h3 { margin: 0; color: white; font-size: 15px; }
+.recipes-head > div { display: flex; flex-wrap: wrap; gap: 6px; }
+.recipes-head button { padding: 7px 9px; border: 1px solid #34453f; border-radius: 7px; color: #92a49d; background: transparent; cursor: pointer; font-size: 11px; }
+.recipes-head button[aria-pressed="true"] { border-color: #72984d; color: var(--lime); background: #17271f; }
+.recipes pre { min-height: 180px; margin-top: 20px; padding: 20px; border-radius: 10px; background: #101f1b; line-height: 1.7; }
+.recipes > .copy { position: absolute; right: 25px; bottom: 24px; }
+
+.guide-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 13px; }
+.guide-grid article { grid-column: span 2; padding: 25px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); }
+.guide-grid article:nth-child(4), .guide-grid article:nth-child(5) { grid-column: span 3; }
+.guide-grid article > span { color: var(--green-dark); font: 800 10px/1 monospace; letter-spacing: .1em; text-transform: uppercase; }
+.guide-grid h3 { margin: 24px 0 11px; font-size: 19px; }
+.guide-grid p, .guide-grid li { color: var(--muted); font-size: 14px; }
+.guide-grid ol { margin: 0; padding-left: 19px; }
+.guide-grid li + li { margin-top: 7px; }
+.delivery { max-width: none; padding-left: max(34px, calc((100vw - 1192px) / 2)); padding-right: max(34px, calc((100vw - 1192px) / 2)); color: white; background: var(--night); }
+.delivery .section-intro .eyebrow { color: var(--lime); }
+.delivery .section-intro > p:last-child { color: #99aaa4; }
+.delivery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.delivery-grid article { padding: 23px; border: 1px solid #2a3b35; border-radius: 13px; background: #101d19; }
+.delivery-grid strong { color: var(--lime); font-size: 18px; }
+.delivery-grid p { margin: 8px 0 0; color: #9baca5; font-size: 13px; }
+.detail-list { margin-top: 25px; border-top: 1px solid #34433e; }
+.detail-list details { border-bottom: 1px solid #34433e; }
+.detail-list summary { padding: 18px 0; cursor: pointer; font-weight: 750; }
+.detail-list details p { max-width: 850px; color: #aebdb8; }
 
 .playground { display: grid; grid-template-columns: .75fr 1.25fr; overflow: hidden; border-radius: var(--radius); background: white; box-shadow: var(--shadow); }
 .playground form { display: grid; gap: 17px; align-content: center; padding: 35px; border-right: 1px solid var(--line); }
@@ -197,6 +225,8 @@ footer nav a { color: #bac7c2; }
   .split { grid-template-columns: 1fr; gap: 20px; }
   .sticky-intro { position: static; }
   .context-grid { grid-template-columns: 1fr 1fr; }
+  .guide-grid article, .guide-grid article:nth-child(4), .guide-grid article:nth-child(5) { grid-column: span 3; }
+  .delivery-grid { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 620px) {
@@ -207,6 +237,10 @@ footer nav a { color: #bac7c2; }
   .trust-strip div { padding: 5px 0; border-left: 0; }
   .section { padding: 75px 21px; }
   .steps, .feature-grid, .context-grid, .playground, .migration-code { grid-template-columns: 1fr; }
+  .guide-grid { grid-template-columns: 1fr; }
+  .guide-grid article, .guide-grid article:nth-child(4), .guide-grid article:nth-child(5) { grid-column: auto; }
+  .delivery-grid { grid-template-columns: 1fr; }
+  .recipes-head { align-items: start; flex-direction: column; }
   .api-browser { grid-template-columns: 1fr; }
   .api-tabs { display: flex; overflow-x: auto; border-right: 0; border-bottom: 1px solid #293934; }
   .api-tabs button { white-space: nowrap; }

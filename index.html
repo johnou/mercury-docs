@@ -16,7 +16,7 @@
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="topbar">
     <a class="brand" href="#top" aria-label="Mercury home"><svg viewBox="0 0 40 40" role="img" aria-label=""><path d="M9 27 16 8l5 12 4-8 6 15h-6l-4-10-5 13-3-3Z"/></svg><span>Mercury</span></a>
-    <nav aria-label="Primary navigation"><a href="#start">Get started</a><a href="#reference">API</a><a href="#roadmap">Roadmap</a><a href="./legacy.html">Legacy docs</a></nav>
+    <nav aria-label="Primary navigation"><a href="#start">Get started</a><a href="#reference">API</a><a href="#workbench">Workbench</a><a href="#roadmap">Status</a><a href="./legacy.html">Legacy docs</a></nav>
     <button class="search-open" type="button" data-search-open aria-haspopup="dialog"><span aria-hidden="true">⌕</span> Search <kbd>/</kbd></button>
   </header>
 
@@ -58,7 +58,7 @@ console.log(<span class="str">"summary updated"</span>, issue.key);</code></pre>
         <li><span>02</span><div><h3>Add Mercury script</h3><p>Add the Mercury post-function. Write JavaScript against the documented context and helpers.</p></div></li>
         <li><span>03</span><div><h3>Validate and simulate</h3><p>Mercury checks and simulates the script on its backend. Review recorded updates before you save the rule.</p></div></li>
       </ol>
-      <aside class="callout"><strong>Cloud installation is not public yet.</strong> Installation instructions will appear after live testing and release checks finish.</aside>
+      <aside class="callout"><strong>Development preview.</strong> Installation is limited to the private Mercury demo site. The Cloud app is not available for public installation.</aside>
     </section>
 
     <section class="section split" id="how-it-runs">
@@ -72,13 +72,18 @@ console.log(<span class="str">"summary updated"</span>, issue.key);</code></pre>
     </section>
 
     <section class="section" id="reference">
-      <div class="section-intro"><p class="eyebrow">Script reference</p><h2>The API that exists today</h2><p>This page documents implemented helpers only. Select a helper to inspect its contract and copy an example.</p></div>
+      <div class="section-intro"><p class="eyebrow">Script reference</p><h2>Eight focused Jira helpers</h2><p>Select a helper to inspect its implemented contract and copy an example. Workflow scripts and workbench scripts use the same API.</p></div>
       <div class="api-browser"><div class="api-tabs" role="tablist" aria-label="Jira helpers" data-api-tabs></div><div class="api-panel" data-api-panel></div></div>
       <div class="context-grid">
         <article><h3><code>issue</code></h3><p>The transitioned issue with <code>id</code>, <code>key</code>, and the fields Jira supplied.</p></article>
         <article><h3><code>transition</code></h3><p>The transition ID plus normalized <code>from</code> and <code>to</code> statuses.</p></article>
         <article><h3><code>actor</code></h3><p>The initiating account ID when Jira includes one. The value can be <code>null</code>.</p></article>
         <article><h3><code>console</code></h3><p>Bounded <code>log</code>, <code>warn</code>, and <code>error</code> methods.</p></article>
+      </div>
+      <div class="recipes">
+        <div class="recipes-head"><h3>Copy a complete recipe</h3><div data-recipe-tabs></div></div>
+        <pre><code data-recipe-source></code></pre>
+        <button class="copy" type="button" data-copy-recipe>Copy recipe</button>
       </div>
     </section>
 
@@ -95,10 +100,36 @@ console.log(<span class="str">"summary updated"</span>, issue.key);</code></pre>
       </div>
     </section>
 
+    <section class="section" id="workbench">
+      <div class="section-intro"><p class="eyebrow">Development preview</p><h2>Use the automation workbench</h2><p>Jira administrators can open five connected views. The backend checks Jira administrator permission for every action.</p></div>
+      <div class="guide-grid">
+        <article><span>Console</span><h3>Simulate, then confirm a live run</h3><ol><li>Write a script of 24 KiB or less.</li><li>Select <strong>Simulate</strong> to use the DEMO-1 sample. Simulation records writes and never changes Jira.</li><li>Enter one issue key and select <strong>Review live run</strong>.</li><li>Check the exact source and issue key. Select <strong>Run live</strong> before the one-use confirmation expires after five minutes.</li></ol><p>Live console runs use the Mercury app identity.</p></article>
+        <article><span>Scripts</span><h3>Save and pin revisions</h3><ol><li>Select <strong>Save revision</strong> to create an immutable revision.</li><li>Open <strong>Scripts</strong> to review or load an older revision.</li><li>Choose a saved revision when you create a listener or scheduled job.</li></ol><p>An automation stays pinned to that revision. Archiving a script prevents new enables, but it does not disable automations that already use the revision.</p></article>
+        <article><span>History</span><h3>Inspect the last 30 days</h3><p>Open <strong>History</strong> to inspect the origin, issue, start time, duration, Jira call count, logs, and failure code.</p><p>A run left as <code>running</code> after a crash has an uncertain outcome. Mercury does not retry it automatically.</p></article>
+        <article><span>Listeners</span><h3>React to issue events</h3><ol><li>Choose <strong>Issue created</strong> or <strong>Issue updated</strong>.</li><li>Enter the required project key.</li><li>Choose a saved revision and save the listener disabled.</li><li>Enable it after you review the source and project.</li></ol></article>
+        <article><span>Scheduled jobs</span><h3>Run against one issue</h3><ol><li>Choose one issue key and a saved revision.</li><li>Select <strong>Every hour</strong>, <strong>Every day</strong>, or <strong>Every week</strong>.</li><li>Save the job disabled, then enable it when ready.</li></ol><p>Intervals use UTC epoch buckets rather than a wall-clock appointment.</p></article>
+      </div>
+    </section>
+
+    <section class="section delivery" id="automation-delivery">
+      <div class="section-intro"><p class="eyebrow">Automation delivery</p><h2>Bounded work with visible tradeoffs</h2><p>The development preview favors loop protection and an auditable result over automatic replay.</p></div>
+      <div class="delivery-grid">
+        <article><strong>25 definitions</strong><p>An installation can store up to 25 listener and scheduled-job definitions. Up to five can be enabled at once.</p></article>
+        <article><strong>30-day identity</strong><p>Mercury deduplicates accepted events and schedule buckets for 30 days.</p></article>
+        <article><strong>Loop protection</strong><p>Listeners skip events marked <code>selfGenerated</code> or carrying a Mercury trace value.</p></article>
+        <article><strong>No automatic retry</strong><p>Jira may accept some writes before a failure. Mercury records the failure and does not promise exactly-once effects.</p></article>
+      </div>
+      <div class="detail-list">
+        <details><summary>How listener identity works</summary><p>Created events use the Jira issue ID. Updated events require both the issue ID and a changelog ID. Mercury skips an updated event when that stable identity is missing. It also drops an event whose timestamp is more than 24 hours from receipt.</p></details>
+        <details><summary>How schedule buckets work</summary><p>One coarse hourly Forge trigger checks enabled jobs. A job uses a 1, 24, or 168-hour UTC epoch bucket. The first trigger after enablement can run the job. Missed intervals coalesce into the current bucket.</p><p>If you edit an enabled job, its new version can run again in the same time bucket because the automation version is part of the deduplication identity.</p></details>
+        <details><summary>What delivery does not guarantee</summary><p>Mercury prevents known duplicate dispatches for 30 days. It does not provide exactly-once Jira writes. It does not retry failed runs automatically. Scripts can leave partial Jira writes when a later helper call fails.</p></details>
+      </div>
+    </section>
+
     <section class="section" id="roadmap">
-      <div class="section-intro roadmap-head"><div><p class="eyebrow">Feature availability</p><h2>What is built, and what comes next</h2></div><div class="legend"><span class="status available">Implemented</span><span class="status planned">Planned</span></div></div>
+      <div class="section-intro roadmap-head"><div><p class="eyebrow">Feature availability</p><h2>What is built, and where you can use it</h2></div><div class="legend"><span class="status available">Implemented</span><span class="status testing">Development preview</span></div></div>
       <div class="feature-grid" data-feature-grid></div>
-      <p class="roadmap-note">Names and APIs for planned features can change before release. Mercury does not claim full ScriptRunner feature parity.</p>
+      <p class="roadmap-note">Development-preview features are implemented and under live verification on the private demo site. They are not a public release. Mercury does not claim full ScriptRunner feature parity.</p>
     </section>
 
     <section class="section" id="migration">
