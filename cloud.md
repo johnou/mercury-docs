@@ -39,7 +39,7 @@ Sample simulation is subject to the same installation usage limits as other admi
 
 A Jira administrator can select **Dry-run real issue** to run source against one real issue. Mercury reads current Jira data with the app identity. Read helpers call Jira. Write helpers validate their arguments and append to `proposedWrites` without sending a write request.
 
-A dry run can show how the script behaves with current issue data. Synthetic issues created during the run use collision-safe `dry-run:N` keys, and transitions for synthetic issues are unsupported. Proposed writes can total up to 256 KiB. Mercury does not include script source in Jira write request bodies.
+A dry run can show how the script behaves with current issue data. Synthetic issues created during the run use collision-safe `dry-run:N` keys, and transitions for synthetic issues are unsupported. Proposed writes can total up to 256 KiB.
 
 A dry run does not prove that Jira permissions, workflow conditions, or field rules would accept the proposed writes in a live run. The immediate result includes proposed writes, but retained history contains bounded logs and outcome metadata rather than Jira response values or proposed-write payloads.
 

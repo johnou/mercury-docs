@@ -27,7 +27,7 @@
         <h1>Make the workflow do the routine work.</h1>
         <p class="lede">Mercury runs your JavaScript after a Jira transition. Scripts execute in an isolated backend runtime with a small, permission-checked Jira API.</p>
         <div class="actions"><a class="button primary" href="#start">Write your first script</a><a class="button secondary" href="#how-it-runs">See how isolation works</a></div>
-        <p class="release-note">Workflow post-functions support <code>jira.getIssue</code> and <code>jira.updateIssue</code>.</p>
+        <p class="release-note">Workflow post-functions support all eight checked Jira helpers.</p>
       </div>
       <div class="code-window" aria-label="Example Mercury script">
         <div class="window-bar"><span></span><span></span><span></span><strong>transition.js</strong></div>
@@ -102,7 +102,7 @@ console.log(<span class="str">"summary updated"</span>, issue.key);</code></pre>
     </section>
 
     <section class="section" id="workbench">
-      <div class="section-intro"><p class="eyebrow">Automation workbench</p><h2>Build, run, and monitor scripts</h2><p>Jira administrators can open five connected views. The backend checks Jira administrator permission for every action.</p></div>
+      <div class="section-intro"><p class="eyebrow">Automation workbench</p><h2>Build, run, and monitor scripts</h2><p>Jira administrators can open seven connected views. The backend checks Jira administrator permission for every action.</p></div>
       <div class="guide-grid">
         <article><span>Console</span><h3>Simulate, then confirm a live run</h3><ol><li>Write a script of 24 KiB or less.</li><li>Select <strong>Simulate</strong> to use the DEMO-1 sample. Simulation records writes and never changes Jira.</li><li>Enter one issue key and select <strong>Review live run</strong>.</li><li>Check the exact source and issue key. Select <strong>Run live</strong> before the one-use confirmation expires after five minutes.</li></ol><p>In simulation, search accepts only <code>project = DEMO</code> or <code>key = DEMO-n</code>. Sample transitions are <code>11</code> To Do, <code>31</code> In Progress, and <code>41</code> Done.</p><p>Mercury consumes the confirmation and creates the running history record in one atomic operation. Live console runs use the Mercury app identity.</p></article>
         <article><span>Scripts</span><h3>Save and pin revisions</h3><ol><li>Select <strong>Save revision</strong> to create an immutable revision.</li><li>Open <strong>Scripts</strong> to review or load an older revision.</li><li>Choose a saved revision when you create a listener or scheduled job.</li></ol><p>An automation stays pinned to that revision. Archiving a script prevents new enables, but it does not disable automations that already use the revision.</p></article>
