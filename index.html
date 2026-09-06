@@ -9,12 +9,12 @@
 
   <!-- Flatdoc -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script src="https://cdn.rawgit.com/johnou/mercury/v0.0.4/legacy.js"></script>
-  <script src="https://cdn.rawgit.com/johnou/mercury/v0.0.4/flatdoc.js"></script>
+  <script src="./legacy.js"></script>
+  <script src="./flatdoc.js"></script>
 
   <!-- Flatdoc theme -->
-  <link  href="https://cdn.rawgit.com/johnou/mercury/v0.0.4/theme-atlassian/style.css" rel="stylesheet">
-  <script src="https://cdn.rawgit.com/johnou/mercury/v0.0.4/theme-atlassian/script.js"></script>
+  <link  href="./theme-atlassian/style.css" rel="stylesheet">
+  <script src="./theme-atlassian/script.js"></script>
 
   <!-- Meta -->
   <meta content="Mercury for JIRA" property="og:title">
@@ -23,7 +23,7 @@
   <!-- Initializer -->
   <script>
     Flatdoc.run({
-      fetcher: Flatdoc.github('johnou/mercury')
+      fetcher: Flatdoc.file('README.md')
     });
   </script>
 </head>
@@ -33,12 +33,12 @@
     <div class='left'>
       <h1>Mercury for JIRA</h1>
       <ul>
-        <li><a href='https://github.com/johnou/mercury/issues'>Issues</a></li>
+        <li><a href='https://github.com/johnou/mercury-docs/issues'>Issues</a></li>
       </ul>
     </div>
     <div class='right'>
       <!-- GitHub buttons: see https://ghbtns.com -->
-      <iframe src="https://ghbtns.com/github-btn.html?user=johnou&amp;repo=mercury&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
+      <iframe src="https://ghbtns.com/github-btn.html?user=johnou&amp;repo=mercury-docs&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
     </div>
   </div>
 
