@@ -8,6 +8,8 @@ Mercury uses Atlassian Forge and a backend QuickJS runtime. Guest scripts receiv
 
 Workflow post-functions and backend validation and simulation are implemented. The workbench and all eight Jira helpers are implemented as a development preview. Live verification continues on the private Mercury demo site.
 
+A live workflow run on MERC-1 completed in 2.155 seconds with two Jira calls.
+
 Mercury Cloud is not available for public installation. It does not claim full ScriptRunner feature parity.
 
 ## Jira helpers
@@ -34,7 +36,7 @@ The console offers two execution paths:
 3. Review the exact source and issue key.
 4. Select **Run live** within five minutes.
 
-The live confirmation token works once. Live console runs execute with the Mercury app identity. The backend checks that the current user is a Jira administrator before it creates the token or runs the script.
+The live confirmation token works once. Mercury consumes the token and creates the running history record in one atomic operation. Live console runs execute with the Mercury app identity. The backend checks that the current user is a Jira administrator before it creates the token or runs the script.
 
 ## Save scripts and revisions
 
@@ -47,6 +49,8 @@ Listeners and scheduled jobs pin one revision ID. A later script save does not c
 The **History** view retains records for 30 days. Each record includes the origin, issue key, start time, duration, Jira call count, logs, and any failure code.
 
 A record can remain `running` if the Forge invocation crashes after Mercury writes the initial history entry. In that case, the Jira outcome is uncertain. Mercury does not retry the run automatically.
+
+If the script finishes but the final history write fails, Mercury returns the actual script result and logs with a `finalization-failed` warning. It does not rerun the script to repair history.
 
 ## Create a listener
 
@@ -62,7 +66,7 @@ Mercury skips events marked `selfGenerated` and events with a Mercury trace valu
 
 Created events use the Jira issue ID as their stable identity. Updated events require both the issue ID and a changelog ID. Mercury skips an updated event when the changelog identity is missing. It also drops an event whose timestamp is more than 24 hours from receipt.
 
-Mercury keeps successful event claims for 30 days to suppress duplicates. This does not make Jira writes exactly once.
+Mercury keeps successful event claims for 30 days to suppress duplicates. A claim uses the automation ID and stable event identity. Editing, disabling, or re-enabling the listener does not run the same claimed event again. This does not make Jira writes exactly once.
 
 ## Create a scheduled job
 
@@ -76,7 +80,7 @@ A scheduled job runs a saved revision against one issue:
 
 One coarse hourly Forge trigger checks all enabled jobs. Intervals use 1, 24, or 168-hour UTC epoch buckets. The first trigger after enablement can run a job. If Forge misses intervals, Mercury coalesces them into the current bucket instead of replaying every missed run.
 
-Editing an enabled job creates a new automation version. The new version can run again in the same bucket because the automation version forms part of the deduplication identity.
+The claim uses the automation ID and bucket identity. Editing, disabling, or re-enabling a job does not run the same claimed bucket again.
 
 ## Automation limits and failure behavior
 
