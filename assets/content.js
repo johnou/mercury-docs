@@ -89,8 +89,8 @@ window.MERCURY_DOCS = Object.freeze({
   privacyStages: [
     { id: 'declare', name: 'Declare', title: 'Name the people in authored content', detail: 'Mercury records the author automatically. Add Atlassian account IDs for other people whose personal data appears in source, names, settings, or imported content. Empty means you reviewed the content and assert that no other person is represented.' },
     { id: 'report', name: 'Report', title: 'Report retained subjects to Atlassian', detail: 'Hourly maintenance processes work when it is due. Personal-data reporting uses a seven-day default cycle and keeps bounded, resumable state.' },
-    { id: 'erase', name: 'Erase', title: 'Remove declared content and dependants', detail: 'A closed or updated account response queues erasure of declared source, revisions, and dependent automations. Administrators can also request one-subject or installation-wide erasure with typed confirmation.' },
-    { id: 'legacy', name: 'Review legacy', title: 'Classify older untracked source', detail: 'Older source remains unreviewed until an administrator declares every represented account ID or confirms that none are present. Old Forge platform logs follow Atlassian retention and cannot be purged programmatically by Mercury.' }
+    { id: 'erase', name: 'Erase', title: 'Remove declared content and dependants', detail: 'Erasure deletes each associated script or revision and dependent automation, which can affect other administrators. A keyed pseudonymous barrier then prevents the closed account from being collected again while Mercury remains installed.' },
+    { id: 'legacy', name: 'Review legacy', title: 'Classify every older source copy', detail: 'Review scripts and all revision history. Old schema 1 and 2 Jira workflow configurations store source outside KVS; reopen and save or remove each rule. Old exports and Forge platform logs need separate handling.' }
   ],
   search: [
     { title: 'Write your first script', section: 'Get started', href: '#start', text: 'workflow transition add post function validate simulate JavaScript' },
