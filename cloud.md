@@ -99,6 +99,14 @@ Emergency pause blocks new workflow, console, dry-run, listener, and scheduled a
 
 **Usage & health** shows the latest bounded success or failure for workflows and each automation. It also reports failures that happen before normal run history starts. Health records expire after 365 days. Health storage is best effort and never retries a script. Mercury records the Atlassian account ID of the administrator who last changed usage limits or pause state.
 
+## Pricing
+
+Atlassian Marketplace bills Mercury by the number of billable Jira users on the site, not by the number of Mercury administrators. Up to 10 users costs $10 per month. From 11 users, the progressive monthly schedule counts all users: $1.00 for users 1–100, $0.90 for 101–250, $0.75 for 251–1,000, $0.60 for 1,001–2,500, $0.50 for 2,501–5,000, $0.45 for 5,001–7,500, $0.40 for 7,501–10,000, $0.30 for 10,001–25,000, $0.25 for 25,001–50,000, and $0.20 for 50,001–100,000.
+
+Single-instance and multi-instance customers use the same rates. Annual Marketplace pricing is 10 times the monthly price at the annual tier ceiling. Multi-instance customers use annual billing. See the [Mercury Marketplace listing](https://marketplace.atlassian.com/apps/1216459) for the exact annual quote and applicable tax.
+
+The installation limits of 100 admitted runs per UTC hour and 10,000 per UTC month do not vary by seat count.
+
 ## Back up configuration
 
 **Backup** can export configuration while automations are enabled, but every automation in the emitted bundle is disabled. The bundle includes each script's current source, its personal-data declarations, including author account IDs, an archived current source, and older source snapshots required by pinned automations. It can contain at most 10 source snapshots, 25 automation definitions, and 256 KiB of UTF-8 JSON. It excludes history, delivery claims, confirmations, usage, health, pause state, license state, and installation identifiers.

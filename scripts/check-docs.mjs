@@ -1,10 +1,26 @@
 import { createHash } from 'node:crypto';
 import { existsSync, readFileSync } from 'node:fs';
 import { basename, dirname, join, resolve } from 'node:path';
+import '../assets/pricing.js';
 
 const root = resolve(import.meta.dirname, '..');
 const pages = ['index.html', 'cloud-privacy.html', 'data-retention.html', 'cloud-terms.html', 'support.html', 'legacy.html'];
 const failures = [];
+
+const pricingCases = [
+  [1, 10],
+  [10, 10],
+  [11, 11],
+  [100, 100],
+  [101, 100.9],
+  [250, 235],
+  [251, 235.75],
+  [100000, 25822.5]
+];
+for (const [users, expected] of pricingCases) {
+  const actual = globalThis.MERCURY_PRICING.calculateMonthlyPrice(users).total;
+  if (actual !== expected) failures.push(`pricing: ${users} users returned ${actual}, expected ${expected}`);
+}
 
 for (const page of pages) {
   const path = join(root, page);

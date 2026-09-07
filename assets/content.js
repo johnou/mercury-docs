@@ -106,6 +106,7 @@ window.MERCURY_DOCS = Object.freeze({
     { title: 'Use the workbench', section: 'How-to', href: '#workbench', text: 'console saved scripts revisions archive live run confirmation history refresh listeners scheduled jobs' },
     { title: 'Safe operations', section: 'Controls', href: '#operations', text: 'real issue dry run usage hourly monthly budget pause health export import disabled configuration' },
     { title: 'Personal-data lifecycle', section: 'Privacy', href: '#privacy-lifecycle', text: 'declare account IDs author report seven day erase legacy review privacy controls' },
+    { title: 'Cloud pricing', section: 'Pricing', href: '#pricing', text: 'billable Jira users progressive monthly annual Marketplace quote tax' },
     { title: 'Automation limits and delivery', section: 'How-to', href: '#automation-delivery', text: '25 five deduplication self generated trace retry partial writes hourly daily weekly UTC' },
     { title: 'Cloud features', section: 'Features', href: '#roadmap', text: 'console saved scripts library history helpers listeners scheduled jobs available behavior' },
     { title: 'Move from Server', section: 'Migration', href: '#migration', text: 'Groovy JavaScript JVM Cloud port migrate fix versions' },

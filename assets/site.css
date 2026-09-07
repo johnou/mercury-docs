@@ -203,6 +203,26 @@ pre { margin: 0; overflow: auto; }
 .privacy-note { margin: 18px 0 0; color: var(--muted); }
 .privacy-note a { color: var(--green-dark); font-weight: 700; }
 
+.pricing-layout { display: grid; grid-template-columns: .9fr 1.1fr; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); box-shadow: var(--shadow); }
+.pricing-calculator { display: flex; flex-direction: column; justify-content: center; gap: 16px; padding: clamp(28px, 5vw, 52px); border-right: 1px solid var(--line); background: #e8eee9; }
+.pricing-calculator label { color: var(--green-dark); font-size: 13px; font-weight: 800; }
+.pricing-input { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; }
+.pricing-input input { min-width: 0; padding: 11px 12px; border: 1px solid #b9c6c0; border-radius: 9px; color: var(--ink); background: white; }
+.pricing-input input:focus { outline: 3px solid rgba(25,169,116,.2); border-color: var(--green-dark); }
+.pricing-result { margin-top: 14px; }
+.pricing-result span, .pricing-result strong { display: block; }
+.pricing-result span { color: var(--muted); font-size: 12px; font-weight: 700; }
+.pricing-result strong { margin-top: 4px; font-size: clamp(38px, 5vw, 58px); line-height: 1; letter-spacing: -.045em; }
+.pricing-result p { min-height: 44px; margin: 14px 0 0; color: var(--muted); font-size: 13px; }
+.pricing-reference { padding: 32px; }
+.pricing-reference h3 { margin: 0 0 18px; }
+.pricing-reference table { font-size: 13px; }
+.pricing-reference th, .pricing-reference td { padding: 8px 12px; }
+.pricing-reference tbody td:last-child { font-family: monospace; font-weight: 700; }
+.pricing-notes { max-width: 900px; margin-top: 26px; color: var(--muted); }
+.pricing-notes p { margin: 0 0 10px; }
+.pricing-notes .text-link { display: inline-block; margin-top: 8px; }
+
 .legal-page { background: var(--paper); }
 .legal-header { padding: 72px max(24px, calc((100vw - 920px) / 2)) 54px; color: white; background: var(--night); }
 .legal-header .brand { margin-bottom: 52px; }
@@ -286,7 +306,8 @@ footer nav a { color: #bac7c2; }
   .guide-grid { grid-template-columns: 1fr; }
   .guide-grid article, .guide-grid article:nth-child(4), .guide-grid article:nth-child(5) { grid-column: auto; }
   .delivery-grid { grid-template-columns: 1fr; }
-  .operations-grid, .mode-panel dl, .launch-checklist { grid-template-columns: 1fr; }
+  .operations-grid, .mode-panel dl, .launch-checklist, .pricing-layout { grid-template-columns: 1fr; }
+  .pricing-calculator { border-right: 0; border-bottom: 1px solid var(--line); }
   .recipes-head { align-items: start; flex-direction: column; }
   .api-browser { grid-template-columns: 1fr; }
   .api-tabs { display: flex; overflow-x: auto; border-right: 0; border-bottom: 1px solid #293934; }

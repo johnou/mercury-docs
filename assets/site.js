@@ -81,6 +81,36 @@ function renderExample(form) {
   document.querySelector('[data-example-output]').textContent = JSON.stringify(output, null, 2);
 }
 
+function setupPricing() {
+  const form = document.querySelector('[data-pricing-form]');
+  if (!form) return;
+
+  const total = form.querySelector('[data-pricing-total]');
+  const summary = form.querySelector('[data-pricing-summary]');
+  const currency = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+
+  function render() {
+    const users = Number(form.elements.users.value);
+    try {
+      const estimate = globalThis.MERCURY_PRICING.calculateMonthlyPrice(users);
+      total.textContent = currency.format(estimate.total);
+      summary.textContent = users <= 10
+        ? `${users.toLocaleString('en-US')} users on the $10 flat plan`
+        : estimate.lines.map(line => `${line.users.toLocaleString('en-US')} × ${currency.format(line.rate)}`).join(' + ');
+    } catch (error) {
+      total.textContent = 'Enter 1–100,000 users';
+      summary.textContent = error.message;
+    }
+  }
+
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    render();
+  });
+  form.elements.users.addEventListener('input', render);
+  render();
+}
+
 async function copyText(value, button) {
   await navigator.clipboard.writeText(value);
   const previous = button.textContent;
@@ -143,6 +173,7 @@ if (legacyAnchors.has(location.hash.slice(1))) {
     renderExample(exampleForm);
   });
   renderExample(exampleForm);
+  setupPricing();
   document.querySelector('[data-copy-output]').addEventListener('click', event => {
     copyText(document.querySelector('[data-example-output]').textContent, event.currentTarget);
   });

@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import { readFile, writeFile } from 'node:fs/promises';
 
 const pages = {
-  'index.html': ['site.css', 'content.js', 'site.js', 'mercury-original.png'],
+  'index.html': ['site.css', 'content.js', 'pricing.js', 'site.js', 'mercury-original.png'],
   'cloud-privacy.html': ['site.css', 'mercury-original.png'],
   'cloud-terms.html': ['site.css', 'mercury-original.png'],
   'data-retention.html': ['site.css', 'mercury-original.png'],
