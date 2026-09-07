@@ -88,8 +88,8 @@ window.MERCURY_DOCS = Object.freeze({
   ],
   privacyStages: [
     { id: 'declare', name: 'Declare', title: 'Name the people in authored content', detail: 'Mercury records the author automatically. Add up to 20 Atlassian account IDs for other people whose personal data appears in source, names, settings, or imported content. Empty means you reviewed the content and assert that no other person is represented.' },
-    { id: 'report', name: 'Report', title: 'Report retained subjects to Atlassian', detail: 'Hourly maintenance processes work when it is due. Personal-data reporting uses a seven-day default cycle and keeps bounded, resumable state.' },
-    { id: 'erase', name: 'Erase', title: 'Remove declared content and dependants', detail: 'Erasure deletes each associated script or revision and dependent automation, which can affect other administrators. Installation purge leaves execution paused and preserves keyed closed-account barriers to prevent recollection.' },
+    { id: 'report', name: 'Report', title: 'Report retained subjects to Atlassian', detail: 'Hourly maintenance processes work when it is due. A keyed pseudonymous receipt prevents early repeat reporting, contains no raw account ID, and is removed when the next reporting cycle becomes due.' },
+    { id: 'erase', name: 'Erase', title: 'Remove declared content and dependants', detail: 'Manual erasure removes current declared data; a later explicit author action can store fresh data. Only an Atlassian API closed response creates the installation-long keyed barrier that prevents recollection.' },
     { id: 'legacy', name: 'Review legacy', title: 'Classify every older source copy', detail: 'Review scripts and all revision history. Old schema 1 and 2 Jira workflow configurations store source outside KVS; reopen and save or remove each rule. Old exports and Forge platform logs need separate handling.' }
   ],
   search: [
