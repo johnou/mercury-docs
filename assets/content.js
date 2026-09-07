@@ -77,13 +77,20 @@ window.MERCURY_DOCS = Object.freeze({
     { name: 'Dry-run real issue', detail: 'Read current Jira data while Mercury intercepts and returns every proposed write.' },
     { name: 'Usage and pause controls', detail: 'Lower hourly or monthly run limits and pause new admissions without hiding history.' },
     { name: 'Automation health', detail: 'Inspect the latest success or failure, including errors before execution starts.' },
-    { name: 'Backup and restore', detail: 'Move current and pinned source snapshots as standalone imported scripts with disabled automations.' }
+    { name: 'Backup and restore', detail: 'Move current and pinned source snapshots as standalone imported scripts with disabled automations.' },
+    { name: 'Personal-data controls', detail: 'Review declared subjects, reporting state, legacy source, and pending erasure without a license gate.' }
   ],
   modes: [
-    { id: 'sample', name: 'Sample simulation', reads: 'DEMO sample data', writes: 'Returned only', confirmation: 'Not required', history: 'Logs retained for 30 days', note: 'Counts toward usage limits. Use this first to check syntax and payload shape.' },
-    { id: 'dryrun', name: 'Dry-run real issue', reads: 'Current Jira data as app', writes: 'Intercepted and returned', confirmation: 'Jira administrator', history: 'Logs retained for 30 days', note: 'Proposed writes and Jira response values are excluded from retained history. Jira does not validate or accept those writes.' },
+    { id: 'sample', name: 'Sample simulation', reads: 'DEMO sample data', writes: 'Returned only', confirmation: 'Not required', history: 'Metrics retained for 30 days', note: 'Counts toward usage limits. Guest console values are available in the live result and are not retained.' },
+    { id: 'dryrun', name: 'Dry-run real issue', reads: 'Current Jira data as app', writes: 'Intercepted and returned', confirmation: 'Jira administrator', history: 'Metrics retained for 30 days', note: 'Guest logs, proposed writes, and Jira response values are excluded from retained history. Jira does not validate or accept those writes.' },
     { id: 'live', name: 'Live console run', reads: 'Current Jira data', writes: 'Sent to Jira', confirmation: 'One use, five minutes', history: 'Retained for 30 days', note: 'Review the exact source and issue key before you confirm.' },
     { id: 'automatic', name: 'Listener or job', reads: 'Current Jira data', writes: 'Sent to Jira', confirmation: 'Enabled definition', history: 'Retained for 30 days', note: 'The pinned revision runs within installation limits. A rejected job is not replayed automatically.' }
+  ],
+  privacyStages: [
+    { id: 'declare', name: 'Declare', title: 'Name the people in authored content', detail: 'Mercury records the author automatically. Add Atlassian account IDs for other people whose personal data appears in source, names, settings, or imported content. Empty means you reviewed the content and assert that no other person is represented.' },
+    { id: 'report', name: 'Report', title: 'Report retained subjects to Atlassian', detail: 'Hourly maintenance processes work when it is due. Personal-data reporting uses a seven-day default cycle and keeps bounded, resumable state.' },
+    { id: 'erase', name: 'Erase', title: 'Remove declared content and dependants', detail: 'A closed or updated account response queues erasure of declared source, revisions, and dependent automations. Administrators can also request one-subject or installation-wide erasure with typed confirmation.' },
+    { id: 'legacy', name: 'Review legacy', title: 'Classify older untracked source', detail: 'Older source remains unreviewed until an administrator declares every represented account ID or confirms that none are present. Old Forge platform logs follow Atlassian retention and cannot be purged programmatically by Mercury.' }
   ],
   search: [
     { title: 'Write your first script', section: 'Get started', href: '#start', text: 'workflow transition add post function validate simulate JavaScript' },
@@ -98,6 +105,7 @@ window.MERCURY_DOCS = Object.freeze({
     { title: 'jira.linkIssues', section: 'API', href: '#reference', text: 'link inward outward issue key type helper' },
     { title: 'Use the workbench', section: 'How-to', href: '#workbench', text: 'console saved scripts revisions archive live run confirmation history refresh listeners scheduled jobs' },
     { title: 'Safe operations', section: 'Controls', href: '#operations', text: 'real issue dry run usage hourly monthly budget pause health export import disabled configuration' },
+    { title: 'Personal-data lifecycle', section: 'Privacy', href: '#privacy-lifecycle', text: 'declare account IDs author report seven day erase legacy review privacy controls' },
     { title: 'Automation limits and delivery', section: 'How-to', href: '#automation-delivery', text: '25 five deduplication self generated trace retry partial writes hourly daily weekly UTC' },
     { title: 'Cloud features', section: 'Features', href: '#roadmap', text: 'console saved scripts library history helpers listeners scheduled jobs available behavior' },
     { title: 'Move from Server', section: 'Migration', href: '#migration', text: 'Groovy JavaScript JVM Cloud port migrate fix versions' },

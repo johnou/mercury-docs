@@ -41,7 +41,7 @@ A Jira administrator can select **Dry-run real issue** to run source against one
 
 A dry run can show how the script behaves with current issue data. Synthetic issues created during the run use collision-safe `dry-run:N` keys, and transitions for synthetic issues are unsupported. Proposed writes can total up to 256 KiB.
 
-A dry run does not prove that Jira permissions, workflow conditions, or field rules would accept the proposed writes in a live run. The immediate result includes proposed writes, but retained history contains bounded logs and outcome metadata rather than Jira response values or proposed-write payloads.
+A dry run does not prove that Jira permissions, workflow conditions, or field rules would accept the proposed writes in a live run. The immediate result includes proposed writes and console values, but retained history contains outcome metadata rather than guest logs, Jira response values, or proposed-write payloads.
 
 ## Save scripts and revisions
 
@@ -51,7 +51,7 @@ Listeners and scheduled jobs pin one revision ID. A later script save does not c
 
 ## Read run history
 
-The **History** view retains records for 30 days. Open **History**, then select **Refresh** to load runs completed since the page opened. Each record includes the origin, issue key, start time, duration, Jira call count, logs, and any failure code.
+The **History** view retains operational records for 30 days. Open **History**, then select **Refresh** to load runs completed since the page opened. Each record includes the origin, issue key, start time, duration, Jira call count, and any fixed failure code. Guest console values and arbitrary error text are returned to an interactive caller when available but are not stored in history.
 
 A record can remain `running` if the Forge invocation crashes after Mercury writes the initial history entry. In that case, the Jira outcome is uncertain. Mercury does not retry the run automatically.
 
@@ -101,9 +101,21 @@ Emergency pause blocks new workflow, console, dry-run, listener, and scheduled a
 
 ## Back up configuration
 
-**Backup** can export configuration while automations are enabled, but every automation in the emitted bundle is disabled. The bundle includes each script's current source, including an archived current source, plus older source snapshots required by pinned automations. It can contain at most 10 source snapshots, 25 automation definitions, and 256 KiB of UTF-8 JSON. It excludes history, logs, account IDs, delivery claims, confirmations, usage, health, pause state, license state, and installation identifiers.
+**Backup** can export configuration while automations are enabled, but every automation in the emitted bundle is disabled. The bundle includes each script's current source, its personal-data declarations, including author account IDs, an archived current source, and older source snapshots required by pinned automations. It can contain at most 10 source snapshots, 25 automation definitions, and 256 KiB of UTF-8 JSON. It excludes history, delivery claims, confirmations, usage, health, pause state, license state, and installation identifiers.
 
 Restore validates the complete bundle before writing. It creates each source snapshot as a new standalone script with a new local ID rather than recreating a script's complete revision chain. Imported automations also receive new IDs and remain disabled. Repeating the same bundle import is idempotent while the app is installed; reusing its bundle ID with changed content is rejected. Review imported source and settings before enabling an automation.
+
+## Manage personal data
+
+Open **Privacy** to review declared subjects, reporting state, pending erasure, and legacy source that still needs review. Privacy controls remain available when the app does not have an active license.
+
+Mercury records the author of retained source and configuration automatically. When you save source, prepare a console run, save an automation, change an authored control reason, or import configuration, declare the Atlassian account IDs of other people whose personal data appears in the authored content. An empty declaration means you reviewed that content and assert that it contains no other person's personal data. Mercury does not infer every person represented in free-form text.
+
+Mercury checks hourly for privacy work that is due. Personal-data reporting uses a seven-day default cycle. When Atlassian reports an account as closed or updated, Mercury queues removal of declared content, including affected revisions and dependent automations. The **Privacy** view also provides typed confirmations for one-subject erasure, installation-wide purge, legacy review, and a maintenance run.
+
+Legacy source is marked unreviewed because Mercury cannot invent subjects for existing free-form content. An administrator must declare the represented account IDs or confirm that none are present. New execution stays blocked for unreviewed source. Mercury stops writing guest logs and arbitrary errors to persistent history and Forge logs. Older Forge platform logs remain subject to Atlassian's retention and cannot be purged programmatically by Mercury.
+
+Exports contain source and declarations and can create copies outside Mercury. Store and delete those copies according to your organization's policy. See [Mercury Cloud privacy](cloud-privacy.html) and [data retention](data-retention.html).
 
 ## Automation limits and failure behavior
 

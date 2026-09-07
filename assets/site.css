@@ -192,6 +192,16 @@ pre { margin: 0; overflow: auto; }
 .launch-checklist li { display: grid; gap: 4px; padding: 18px 20px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.45); }
 .launch-checklist strong { color: var(--green-dark); font-size: 13px; }
 .launch-checklist span { color: var(--muted); font-size: 13px; }
+.privacy-lifecycle { background: #e8eee9; }
+.privacy-explorer { display: grid; grid-template-columns: 220px 1fr; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); box-shadow: var(--shadow); }
+.privacy-tabs { display: grid; align-content: start; gap: 5px; padding: 18px; border-right: 1px solid var(--line); background: #f4f2ea; }
+.privacy-tabs button { padding: 13px; border: 0; border-radius: 8px; color: var(--muted); background: transparent; text-align: left; cursor: pointer; }
+.privacy-tabs button[aria-selected="true"] { color: white; background: var(--green-dark); }
+.privacy-panel { min-height: 220px; padding: 38px; }
+.privacy-panel h3 { max-width: 680px; margin: 8px 0 12px; font-size: 28px; }
+.privacy-panel > p:last-child { max-width: 760px; color: var(--muted); }
+.privacy-note { margin: 18px 0 0; color: var(--muted); }
+.privacy-note a { color: var(--green-dark); font-weight: 700; }
 
 .legal-page { background: var(--paper); }
 .legal-header { padding: 72px max(24px, calc((100vw - 920px) / 2)) 54px; color: white; background: var(--night); }
@@ -254,9 +264,11 @@ footer nav a { color: #bac7c2; }
   .context-grid { grid-template-columns: 1fr 1fr; }
   .guide-grid article, .guide-grid article:nth-child(4), .guide-grid article:nth-child(5) { grid-column: span 3; }
   .delivery-grid { grid-template-columns: 1fr 1fr; }
-  .mode-explorer { grid-template-columns: 1fr; }
+  .mode-explorer, .privacy-explorer { grid-template-columns: 1fr; }
   .mode-tabs { display: flex; overflow-x: auto; border-right: 0; border-bottom: 1px solid #293934; }
   .mode-tabs button { width: auto; white-space: nowrap; }
+  .privacy-tabs { display: flex; overflow-x: auto; border-right: 0; border-bottom: 1px solid var(--line); }
+  .privacy-tabs button { white-space: nowrap; }
 }
 
 @media (max-width: 760px) {

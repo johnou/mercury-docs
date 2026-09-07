@@ -50,6 +50,15 @@ function renderModes(selectedId) {
   document.querySelectorAll('[data-mode]').forEach(button => button.addEventListener('click', () => renderModes(button.dataset.mode)));
 }
 
+function renderPrivacy(selectedId) {
+  const selected = docs.privacyStages.find(stage => stage.id === selectedId) || docs.privacyStages[0];
+  document.querySelector('[data-privacy-tabs]').innerHTML = docs.privacyStages.map(stage =>
+    `<button type="button" role="tab" aria-selected="${stage.id === selected.id}" data-privacy-stage="${stage.id}">${escapeHtml(stage.name)}</button>`
+  ).join('');
+  document.querySelector('[data-privacy-panel]').innerHTML = `<p class="eyebrow">${escapeHtml(selected.name)}</p><h3>${escapeHtml(selected.title)}</h3><p>${escapeHtml(selected.detail)}</p>`;
+  document.querySelectorAll('[data-privacy-stage]').forEach(button => button.addEventListener('click', () => renderPrivacy(button.dataset.privacyStage)));
+}
+
 function renderRecipe(selectedTitle) {
   const selected = docs.recipes.find(recipe => recipe.title === selectedTitle) || docs.recipes[0];
   document.querySelector('[data-recipe-tabs]').innerHTML = docs.recipes.map(recipe =>
@@ -127,6 +136,7 @@ if (legacyAnchors.has(location.hash.slice(1))) {
   renderRecipe(docs.recipes[0].title);
   renderFeatures();
   renderModes(docs.modes[0].id);
+  renderPrivacy(docs.privacyStages[0].id);
   const exampleForm = document.querySelector('[data-example-form]');
   exampleForm.addEventListener('submit', event => {
     event.preventDefault();

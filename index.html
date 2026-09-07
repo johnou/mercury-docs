@@ -9,15 +9,15 @@
   <meta property="og:description" content="Write focused JavaScript automation for Jira Cloud workflows.">
   <title>Mercury for Jira Cloud</title>
   <link rel="icon" type="image/png" href="./assets/mercury-original.png?v=d432aed28987">
-  <link rel="stylesheet" href="./assets/site.css?v=bf2d35e01454">
-  <script src="./assets/content.js?v=58f0be5f268d" defer></script>
-  <script src="./assets/site.js?v=78b6e7a4508e" defer></script>
+  <link rel="stylesheet" href="./assets/site.css?v=f792966d9d93">
+  <script src="./assets/content.js?v=70682834eebd" defer></script>
+  <script src="./assets/site.js?v=15d47c9e1298" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="topbar">
     <a class="brand" href="#top" aria-label="Mercury home"><img src="./assets/mercury-original.png?v=d432aed28987" alt=""><span>Mercury</span></a>
-    <nav aria-label="Primary navigation"><a href="#start">Get started</a><a href="#reference">API</a><a href="#workbench">Workbench</a><a href="#operations">Controls</a><a href="./support.html">Support</a></nav>
+    <nav aria-label="Primary navigation"><a href="#start">Get started</a><a href="#reference">API</a><a href="#workbench">Workbench</a><a href="#operations">Controls</a><a href="#privacy-lifecycle">Privacy</a><a href="./support.html">Support</a></nav>
     <button class="search-open" type="button" data-search-open aria-haspopup="dialog"><span aria-hidden="true">⌕</span> Search <kbd>/</kbd></button>
   </header>
 
@@ -103,14 +103,23 @@ console.log(<span class="str">"summary updated"</span>, issue.key);</code></pre>
     </section>
 
     <section class="section" id="workbench">
-      <div class="section-intro"><p class="eyebrow">Automation workbench</p><h2>Build, run, and monitor scripts</h2><p>Jira administrators can open seven connected views. The backend checks Jira administrator permission for every action.</p></div>
+      <div class="section-intro"><p class="eyebrow">Automation workbench</p><h2>Build, run, and monitor scripts</h2><p>Jira administrators can open eight connected views. The backend checks Jira administrator permission for every action.</p></div>
       <div class="guide-grid">
         <article><span>Console</span><h3>Simulate, then confirm a live run</h3><ol><li>Write a script of 24 KiB or less.</li><li>Select <strong>Simulate</strong> to use the DEMO-1 sample. Simulation records writes and never changes Jira.</li><li>Enter one issue key and select <strong>Review live run</strong>.</li><li>Check the exact source and issue key. Select <strong>Run live</strong> before the one-use confirmation expires after five minutes.</li></ol><p>In simulation, search accepts only <code>project = DEMO</code> or <code>key = DEMO-n</code>. Sample transitions are <code>11</code> To Do, <code>31</code> In Progress, and <code>41</code> Done.</p><p>Mercury consumes the confirmation and creates the running history record in one atomic operation. Live console runs use the Mercury app identity.</p></article>
         <article><span>Scripts</span><h3>Save and pin revisions</h3><ol><li>Select <strong>Save revision</strong> to create an immutable revision.</li><li>Open <strong>Scripts</strong> to review or load an older revision.</li><li>Choose a saved revision when you create a listener or scheduled job.</li></ol><p>An automation stays pinned to that revision. Archiving a script prevents new enables, but it does not disable automations that already use the revision.</p></article>
-        <article><span>History</span><h3>Inspect the last 30 days</h3><p>Open <strong>History</strong>, then select <strong>Refresh</strong> to load runs completed since the page opened. Inspect the origin, issue, start time, duration, Jira call count, logs, and failure code.</p><p>A run left as <code>running</code> after a crash has an uncertain outcome. Mercury does not retry it automatically. If only final history storage fails, the console still returns the actual script result and logs with a <code>finalization-failed</code> warning.</p></article>
+        <article><span>History</span><h3>Inspect the last 30 days</h3><p>Open <strong>History</strong>, then select <strong>Refresh</strong> to load runs completed since the page opened. Inspect the origin, issue, start time, duration, Jira call count, and fixed failure code. Guest console values are not retained.</p><p>A run left as <code>running</code> after a crash has an uncertain outcome. Mercury does not retry it automatically. If only final history storage fails, the console still returns the actual script result and live logs with a <code>finalization-failed</code> warning.</p></article>
         <article><span>Listeners</span><h3>React to issue events</h3><ol><li>Choose <strong>Issue created</strong> or <strong>Issue updated</strong>.</li><li>Enter the required project key.</li><li>Choose a saved revision and save the listener disabled.</li><li>Enable it after you review the source and project.</li></ol></article>
         <article><span>Scheduled jobs</span><h3>Run against one issue</h3><ol><li>Choose one issue key and a saved revision.</li><li>Select <strong>Every hour</strong>, <strong>Every day</strong>, or <strong>Every week</strong>.</li><li>Save the job disabled, then enable it when ready.</li></ol><p>Intervals use UTC epoch buckets rather than a wall-clock appointment.</p></article>
       </div>
+    </section>
+
+    <section class="section privacy-lifecycle" id="privacy-lifecycle">
+      <div class="section-intro"><p class="eyebrow">Privacy controls</p><h2>Declare, report, and erase personal data</h2><p>Mercury tracks the author automatically. Administrators declare account IDs for other people named in retained source, names, and settings.</p></div>
+      <div class="privacy-explorer">
+        <div class="privacy-tabs" role="tablist" aria-label="Privacy lifecycle" data-privacy-tabs></div>
+        <div class="privacy-panel" role="tabpanel" data-privacy-panel></div>
+      </div>
+      <p class="privacy-note">An empty declaration means the administrator reviewed the authored content and asserts that it contains no other person’s personal data. Exported copies remain the administrator’s responsibility. <a href="./cloud-privacy.html">Read the Cloud privacy notice</a>.</p>
     </section>
 
     <section class="section operations" id="operations">
